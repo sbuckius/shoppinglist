@@ -43,28 +43,53 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 16px; margin-bottom: 24px;
 }
+.shop-section-header {
+  display:flex; align-items:center; gap:10px; margin:20px 0 10px;
+  padding-bottom:8px; border-bottom:2px solid rgba(255,255,255,0.08);
+}
+.shop-section-title {
+  font-size:13px; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:rgba(255,255,255,0.4);
+}
+.shop-section-subtitle { font-size:11px; color:rgba(255,255,255,0.25); margin-left:auto; }
+
+.shop-panels {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:14px; margin-bottom:10px;
+}
 .shop-panel {
-  border-radius: 20px; padding: 18px; border: 3px solid transparent;
-  position: relative; overflow: hidden;
+  border-radius:18px; padding:16px; border:3px solid transparent;
+  position:relative; overflow:hidden;
 }
 .shop-panel::before { content:''; position:absolute; top:0; left:0; right:0; height:5px; }
-.shop-sun  { background:#0d3d2a; border-color:#00c48a; }
-.shop-sun::before  { background: linear-gradient(90deg,#00c48a,#7ecb3a); }
-.shop-wed2 { background:#1a0a3d; border-color:#b07eff; }
-.shop-wed2::before { background: linear-gradient(90deg,#b07eff,#5ba3ff); }
-.shop-header { display:flex; align-items:flex-start; gap:12px; margin-bottom:14px; padding-bottom:12px; border-bottom:1.5px dashed rgba(255,255,255,0.2); }
-.shop-icon { font-size:32px; line-height:1; flex-shrink:0; }
-.shop-title { font-size:17px; font-weight:800; color:white; }
-.shop-subtitle { font-size:12px; color:rgba(255,255,255,0.55); margin-top:2px; }
-.shop-count { margin-left:auto; font-size:12px; font-weight:700; padding:3px 10px; border-radius:20px; background:rgba(255,255,255,0.15); color:white; white-space:nowrap; flex-shrink:0; }
-.aisle-label { font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.12em; color:rgba(255,255,255,0.45); margin:12px 0 5px; padding-left:2px; }
-.shop-item { display:flex; align-items:baseline; gap:6px; padding:3px 4px; font-size:13.5px; color:rgba(255,255,255,0.9); line-height:1.4; flex-wrap:wrap; }
+
+/* Per-store colors */
+.shop-costco  { background:#002a6b; border-color:#0057a8; }
+.shop-costco::before  { background:linear-gradient(90deg,#0057a8,#4a90e2); }
+.shop-newleaf { background:#0d3300; border-color:#2d7a2d; }
+.shop-newleaf::before { background:linear-gradient(90deg,#2d7a2d,#7ecb3a); }
+.shop-either  { background:#280d3d; border-color:#7a2d7a; }
+.shop-either::before  { background:linear-gradient(90deg,#7a2d7a,#b07eff); }
+.shop-foodbin { background:#3d1a00; border-color:#b85c00; }
+.shop-foodbin::before { background:linear-gradient(90deg,#b85c00,#ff9f5a); }
+.shop-safeway { background:#3d0004; border-color:#c8000a; }
+.shop-safeway::before { background:linear-gradient(90deg,#c8000a,#ff5252); }
+.shop-unknown { background:#1e1e2e; border-color:#555; }
+.shop-unknown::before { background:linear-gradient(90deg,#555,#888); }
+
+.shop-header { display:flex; align-items:flex-start; gap:10px; margin-bottom:12px; padding-bottom:10px; border-bottom:1.5px dashed rgba(255,255,255,0.15); }
+.shop-icon { font-size:26px; line-height:1; flex-shrink:0; }
+.shop-title { font-size:15px; font-weight:800; color:white; }
+.shop-subtitle { font-size:11px; color:rgba(255,255,255,0.5); margin-top:2px; }
+.shop-count { margin-left:auto; font-size:11px; font-weight:700; padding:2px 8px; border-radius:20px; background:rgba(255,255,255,0.15); color:white; white-space:nowrap; flex-shrink:0; }
+.aisle-label { font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.12em; color:rgba(255,255,255,0.4); margin:10px 0 4px; padding-left:2px; }
+.shop-item { display:flex; align-items:baseline; gap:5px; padding:3px 4px; font-size:13px; color:rgba(255,255,255,0.9); line-height:1.4; flex-wrap:wrap; }
 .shop-item::before { content:'•'; color:rgba(255,255,255,0.3); flex-shrink:0; }
-.s-day { font-size:10px; font-weight:700; padding:1px 6px; border-radius:10px; background:rgba(255,255,255,0.13); color:rgba(255,255,255,0.6); white-space:nowrap; flex-shrink:0; }
-.s-meal { font-size:10px; font-weight:700; padding:1px 6px; border-radius:10px; background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.45); white-space:nowrap; flex-shrink:0; }
-.s-qty { font-size:11px; color:rgba(255,255,255,0.45); font-weight:600; }
-.shop-empty { font-size:13px; color:rgba(255,255,255,0.35); font-style:italic; text-align:center; padding:12px 0; }
-.shop-all-done { font-size:14px; color:#00e5a0; font-weight:700; text-align:center; padding:12px 0; }
+.s-day { font-size:10px; font-weight:700; padding:1px 5px; border-radius:10px; background:rgba(255,255,255,0.13); color:rgba(255,255,255,0.6); white-space:nowrap; flex-shrink:0; }
+.s-meal { font-size:10px; font-weight:700; padding:1px 5px; border-radius:10px; background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.4); white-space:nowrap; flex-shrink:0; }
+.s-qty { font-size:11px; color:rgba(255,255,255,0.4); font-weight:600; }
+.shop-empty { font-size:12px; color:rgba(255,255,255,0.25); font-style:italic; text-align:center; padding:10px 0; }
+.shop-all-done { font-size:13px; color:#00e5a0; font-weight:700; text-align:center; padding:10px 0; }
 
 /* ── DAY CARDS ── */
 .days-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:16px; }
@@ -132,6 +157,25 @@ body {
 .item .qty { font-size:11px; color:rgba(255,255,255,0.55); font-weight:600; white-space:nowrap; }
 .del-btn { background:none; border:none; color:rgba(255,255,255,0.3); font-size:16px; cursor:pointer; padding:0 2px; line-height:1; flex-shrink:0; transition:color 0.15s; }
 .del-btn:hover { color:rgba(255,255,255,0.8); }
+
+/* Store picker */
+.item-row { display:flex; flex-direction:column; gap:3px; flex:1; min-width:0; }
+.store-pick { display:flex; gap:4px; flex-wrap:wrap; margin-top:3px; }
+.store-btn {
+  font-family:'Nunito',sans-serif; font-size:10px; font-weight:700;
+  padding:2px 7px; border-radius:20px; border:1.5px solid rgba(255,255,255,0.2);
+  background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.45);
+  cursor:pointer; transition:all 0.15s; white-space:nowrap; line-height:1.4;
+}
+.store-btn:hover { background:rgba(255,255,255,0.18); color:white; }
+.store-btn.active { border-color:transparent; color:white; }
+.store-btn.active.s-costco  { background:#0057a8; }
+.store-btn.active.s-newleaf { background:#2d7a2d; }
+.store-btn.active.s-either  { background:#7a2d7a; }
+.store-btn.active.s-foodbin { background:#b85c00; }
+.store-btn.active.s-safeway { background:#c8000a; }
+
+/* store-section-label removed — now using per-panel cards */
 
 /* Add item row inside meal */
 .add-row { display:flex; gap:6px; margin-top:8px; }
@@ -219,23 +263,72 @@ body {
 </div>
 
 <!-- SHOPPING PANELS -->
-<div class="shop-panels">
-  <div class="shop-panel shop-sun">
-    <div class="shop-header">
-      <div class="shop-icon">🛒</div>
-      <div><div class="shop-title">Sunday Trip</div><div class="shop-subtitle">For Monday · Tuesday · Wednesday</div></div>
-      <div class="shop-count" id="sun-trip-count">— items</div>
-    </div>
-    <div id="sun-trip-list"><div class="shop-empty">Loading…</div></div>
+<div id="shopSection">
+
+  <!-- SUNDAY TRIP -->
+  <div class="shop-section-header">
+    <span class="shop-section-title">🛒 Sunday Trip</span>
+    <span class="shop-section-subtitle">Shopping for Mon · Tue · Wed</span>
   </div>
-  <div class="shop-panel shop-wed2">
-    <div class="shop-header">
-      <div class="shop-icon">🛍️</div>
-      <div><div class="shop-title">Wednesday Trip</div><div class="shop-subtitle">For Thursday · Friday</div></div>
-      <div class="shop-count" id="wed-trip-count">— items</div>
+  <div class="shop-panels" id="sun-panels">
+    <div class="shop-panel shop-costco"  id="sun-costco-panel">
+      <div class="shop-header"><div class="shop-icon">🏪</div><div><div class="shop-title">Costco</div></div><div class="shop-count" id="sun-costco-count">0</div></div>
+      <div id="sun-costco-list"><div class="shop-empty">Nothing here yet</div></div>
     </div>
-    <div id="wed-trip-list"><div class="shop-empty">Loading…</div></div>
+    <div class="shop-panel shop-newleaf" id="sun-newleaf-panel">
+      <div class="shop-header"><div class="shop-icon">🌿</div><div><div class="shop-title">New Leaf</div></div><div class="shop-count" id="sun-newleaf-count">0</div></div>
+      <div id="sun-newleaf-list"><div class="shop-empty">Nothing here yet</div></div>
+    </div>
+    <div class="shop-panel shop-either"  id="sun-either-panel">
+      <div class="shop-header"><div class="shop-icon">🛒</div><div><div class="shop-title">New Leaf or Costco</div></div><div class="shop-count" id="sun-either-count">0</div></div>
+      <div id="sun-either-list"><div class="shop-empty">Nothing here yet</div></div>
+    </div>
+    <div class="shop-panel shop-foodbin" id="sun-foodbin-panel">
+      <div class="shop-header"><div class="shop-icon">🌾</div><div><div class="shop-title">Food Bin</div></div><div class="shop-count" id="sun-foodbin-count">0</div></div>
+      <div id="sun-foodbin-list"><div class="shop-empty">Nothing here yet</div></div>
+    </div>
+    <div class="shop-panel shop-safeway" id="sun-safeway-panel">
+      <div class="shop-header"><div class="shop-icon">🔴</div><div><div class="shop-title">Safeway</div></div><div class="shop-count" id="sun-safeway-count">0</div></div>
+      <div id="sun-safeway-list"><div class="shop-empty">Nothing here yet</div></div>
+    </div>
+    <div class="shop-panel shop-unknown" id="sun-unknown-panel">
+      <div class="shop-header"><div class="shop-icon">📋</div><div><div class="shop-title">Store TBD</div></div><div class="shop-count" id="sun-unknown-count">0</div></div>
+      <div id="sun-unknown-list"><div class="shop-empty">Nothing here yet</div></div>
+    </div>
   </div>
+
+  <!-- WEDNESDAY TRIP -->
+  <div class="shop-section-header">
+    <span class="shop-section-title">🛍️ Wednesday Trip</span>
+    <span class="shop-section-subtitle">Shopping for Thu · Fri</span>
+  </div>
+  <div class="shop-panels" id="wed-panels">
+    <div class="shop-panel shop-costco"  id="wed-costco-panel">
+      <div class="shop-header"><div class="shop-icon">🏪</div><div><div class="shop-title">Costco</div></div><div class="shop-count" id="wed-costco-count">0</div></div>
+      <div id="wed-costco-list"><div class="shop-empty">Nothing here yet</div></div>
+    </div>
+    <div class="shop-panel shop-newleaf" id="wed-newleaf-panel">
+      <div class="shop-header"><div class="shop-icon">🌿</div><div><div class="shop-title">New Leaf</div></div><div class="shop-count" id="wed-newleaf-count">0</div></div>
+      <div id="wed-newleaf-list"><div class="shop-empty">Nothing here yet</div></div>
+    </div>
+    <div class="shop-panel shop-either"  id="wed-either-panel">
+      <div class="shop-header"><div class="shop-icon">🛒</div><div><div class="shop-title">New Leaf or Costco</div></div><div class="shop-count" id="wed-either-count">0</div></div>
+      <div id="wed-either-list"><div class="shop-empty">Nothing here yet</div></div>
+    </div>
+    <div class="shop-panel shop-foodbin" id="wed-foodbin-panel">
+      <div class="shop-header"><div class="shop-icon">🌾</div><div><div class="shop-title">Food Bin</div></div><div class="shop-count" id="wed-foodbin-count">0</div></div>
+      <div id="wed-foodbin-list"><div class="shop-empty">Nothing here yet</div></div>
+    </div>
+    <div class="shop-panel shop-safeway" id="wed-safeway-panel">
+      <div class="shop-header"><div class="shop-icon">🔴</div><div><div class="shop-title">Safeway</div></div><div class="shop-count" id="wed-safeway-count">0</div></div>
+      <div id="wed-safeway-list"><div class="shop-empty">Nothing here yet</div></div>
+    </div>
+    <div class="shop-panel shop-unknown" id="wed-unknown-panel">
+      <div class="shop-header"><div class="shop-icon">📋</div><div><div class="shop-title">Store TBD</div></div><div class="shop-count" id="wed-unknown-count">0</div></div>
+      <div id="wed-unknown-list"><div class="shop-empty">Nothing here yet</div></div>
+    </div>
+  </div>
+
 </div>
 
 <!-- DAY CARDS -->
@@ -539,9 +632,20 @@ function renderMealItems(day, mealId) {
   });
 }
 
+const STORES = [
+  { id:'costco',  label:'Costco',            cls:'s-costco'  },
+  { id:'newleaf', label:'New Leaf',           cls:'s-newleaf' },
+  { id:'either',  label:'New Leaf or Costco', cls:'s-either'  },
+  { id:'foodbin', label:'Food Bin',           cls:'s-foodbin' },
+  { id:'safeway', label:'Safeway',            cls:'s-safeway' },
+];
+const STORE_MAP = Object.fromEntries(STORES.map(s => [s.id, s]));
+const STORE_LABELS = { costco:'Costco', newleaf:'New Leaf', either:'New Leaf or Costco', foodbin:'Food Bin', safeway:'Safeway' };
+
 function buildItemLi(day, mealId, fbKey, item) {
   const li = document.createElement('li');
   li.className = 'item';
+  li.style.alignItems = 'flex-start';
   const cbId = `cb-${day}-${mealId}-${fbKey}`;
 
   const cb = document.createElement('input');
@@ -550,15 +654,43 @@ function buildItemLi(day, mealId, fbKey, item) {
   cb.checked = !!item.checked;
   cb.addEventListener('change', () => {
     setSaving();
-    const path = `${ROOT}/mealItems/${day}/${mealId}/${fbKey}/checked`;
-    set(ref(db, path), cb.checked)
+    set(ref(db, `${ROOT}/mealItems/${day}/${mealId}/${fbKey}/checked`), cb.checked)
       .then(() => { setLive(); updateAllProgress(); rebuildShoppingLists(); });
     updateAllProgress(); rebuildShoppingLists();
   });
 
+  // Label + qty
   const lbl = document.createElement('label');
   lbl.htmlFor = cbId;
   lbl.innerHTML = item.text + (item.qty ? ` <span class="qty">${item.qty}</span>` : '');
+
+  // Store picker buttons
+  const storePick = document.createElement('div');
+  storePick.className = 'store-pick';
+  STORES.forEach(store => {
+    const btn = document.createElement('button');
+    btn.className = `store-btn ${store.cls}`;
+    btn.textContent = store.label;
+    if ((item.store || '') === store.id) btn.classList.add('active');
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const already = (item.store || '') === store.id;
+      const newStore = already ? '' : store.id;
+      item.store = newStore;
+      storePick.querySelectorAll('.store-btn').forEach(b => b.classList.remove('active'));
+      if (!already) btn.classList.add('active');
+      setSaving();
+      set(ref(db, `${ROOT}/mealItems/${day}/${mealId}/${fbKey}/store`), newStore || null)
+        .then(() => { setLive(); rebuildShoppingLists(); });
+    });
+    storePick.appendChild(btn);
+  });
+
+  // Wrapper keeps label + store pills together
+  const itemRow = document.createElement('div');
+  itemRow.className = 'item-row';
+  itemRow.appendChild(lbl);
+  itemRow.appendChild(storePick);
 
   const del = document.createElement('button');
   del.className = 'del-btn';
@@ -569,7 +701,7 @@ function buildItemLi(day, mealId, fbKey, item) {
     remove(ref(db, `${ROOT}/mealItems/${day}/${mealId}/${fbKey}`)).then(() => setLive());
   };
 
-  li.appendChild(cb); li.appendChild(lbl); li.appendChild(del);
+  li.appendChild(cb); li.appendChild(itemRow); li.appendChild(del);
   return li;
 }
 
@@ -721,22 +853,27 @@ buildDayCards();
 ['mon','tue','wed','thu'].forEach(day => seedPresetsIfEmpty(day));
 
 // ── SHOPPING LISTS ──────────────────────────────────────────────────────
+const STORE_ORDER = ['costco','newleaf','either','foodbin','safeway','unknown'];
+
 function rebuildShoppingLists() {
-  buildTripList(SUN_TRIP_DAYS, 'sun-trip-list', 'sun-trip-count');
-  buildTripList(WED_TRIP_DAYS, 'wed-trip-list', 'wed-trip-count');
+  buildAllStorePanels('sun', SUN_TRIP_DAYS);
+  buildAllStorePanels('wed', WED_TRIP_DAYS);
 }
 
-function buildTripList(tripDays, containerId, countId) {
-  const aisleMap = {}; // aisle -> [{text, qty, day, meal}]
+function buildAllStorePanels(trip, tripDays) {
+  // Collect all unchecked items: store -> aisle -> [items]
+  const storeMap = {};
+  STORE_ORDER.forEach(s => storeMap[s] = {});
 
   tripDays.forEach(day => {
     [...MEALS, OTHER_SECTION].forEach(meal => {
       const items = (globalMealItems[day] || {})[meal.id] || {};
       Object.values(items).forEach(item => {
         if (!item || !item.text || item.checked) return;
+        const store = item.store || 'unknown';
         const aisle = item.aisle || 'Other';
-        if (!aisleMap[aisle]) aisleMap[aisle] = [];
-        aisleMap[aisle].push({
+        if (!storeMap[store][aisle]) storeMap[store][aisle] = [];
+        storeMap[store][aisle].push({
           text: item.text,
           qty: item.qty || '',
           day: DAY_LABELS[day],
@@ -746,34 +883,45 @@ function buildTripList(tripDays, containerId, countId) {
     });
   });
 
-  const container = document.getElementById(containerId);
-  const countEl = document.getElementById(countId);
-  if (!container) return;
+  // Render each store panel
+  STORE_ORDER.forEach(store => {
+    const listEl  = document.getElementById(`${trip}-${store}-list`);
+    const countEl = document.getElementById(`${trip}-${store}-count`);
+    const panel   = document.getElementById(`${trip}-${store}-panel`);
+    if (!listEl) return;
 
-  let total = 0;
-  Object.values(aisleMap).forEach(arr => total += arr.length);
-  if (countEl) countEl.textContent = total === 0 ? 'All done!' : `${total} item${total !== 1 ? 's' : ''}`;
+    const aisleMap = storeMap[store];
+    let total = 0;
+    Object.values(aisleMap).forEach(arr => total += arr.length);
 
-  if (total === 0) {
-    container.innerHTML = '<div class="shop-all-done">✅ All items purchased!</div>';
-    return;
-  }
+    if (countEl) countEl.textContent = total === 0 ? '—' : `${total}`;
 
-  let html = '';
-  AISLE_ORDER.forEach(aisle => {
-    const items = aisleMap[aisle];
-    if (!items || !items.length) return;
-    html += `<div class="aisle-label">${aisle}</div>`;
-    items.forEach(item => {
-      html += `<div class="shop-item">
-        <span>${item.text}</span>
-        ${item.qty ? `<span class="s-qty">${item.qty}</span>` : ''}
-        <span class="s-meal">${item.meal}</span>
-        <span class="s-day">${item.day}</span>
-      </div>`;
+    // Hide empty panels (except unknown — always show so items with no store are visible)
+    if (panel) panel.style.display = (total === 0 && store !== 'unknown') ? 'none' : 'block';
+
+    if (total === 0) {
+      listEl.innerHTML = store === 'unknown'
+        ? '<div class="shop-empty">All items have a store assigned ✓</div>'
+        : '';
+      return;
+    }
+
+    let html = '';
+    AISLE_ORDER.forEach(aisle => {
+      const items = aisleMap[aisle];
+      if (!items || !items.length) return;
+      html += `<div class="aisle-label">${aisle}</div>`;
+      items.forEach(item => {
+        html += `<div class="shop-item">
+          <span>${item.text}</span>
+          ${item.qty ? `<span class="s-qty">${item.qty}</span>` : ''}
+          <span class="s-meal">${item.meal}</span>
+          <span class="s-day">${item.day}</span>
+        </div>`;
+      });
     });
+    listEl.innerHTML = html;
   });
-  container.innerHTML = html;
 }
 
 // ── PROGRESS ────────────────────────────────────────────────────────────
