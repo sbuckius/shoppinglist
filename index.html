@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>✨ Weekly Grocery List</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: #1a1a2e;
+    min-height: 100vh;
+    padding: 16px;
+    padding-bottom: 40px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 16px;
+    background: #2a2a3e;
+    border-radius: 24px;
+    border: 2px solid #ff7eb3;
+  }
+
+  .header h1 {
+    font-size: 26px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #ff7eb3, #ff9f5a, #ffd166, #7ecbff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .header p { font-size: 13px; color: #aaa; margin-top: 4px; }
+
+  .kawaii-strip {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin: 10px 0 4px;
+    flex-wrap: wrap;
+  }
+
+  /* sync status */
+  .sync-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-top: 8px;
+    color: #aaa;
+    background: rgba(255,255,255,0.07);
+  }
+
+  .sync-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #888;
+    transition: background 0.3s;
+  }
+
+  .sync-dot.live { background: #00e5a0; }
+  .sync-dot.saving { background: #ffd166; animation: pulse 0.6s infinite alternate; }
+
+  @keyframes pulse { from { opacity: 1; } to { opacity: 0.3; } }
+
+  .days-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+  }
+
+  .day-card {
+    border-radius: 20px;
+    padding: 16px;
+    border: 3px solid transparent;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .day-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+  }
+
+  .day-mon { background: #e8006a; border-color: #ff4da6; }
+  .day-mon::before { background: linear-gradient(90deg, #ff4da6, #ff9f5a); }
+  .day-tue { background: #008a5e; border-color: #00c48a; }
+  .day-tue::before { background: linear-gradient(90deg, #00c48a, #7ecb3a); }
+  .day-wed { background: #1a5fc8; border-color: #5ba3ff; }
+  .day-wed::before { background: linear-gradient(90deg, #5ba3ff, #b07eff); }
+  .day-thu { background: #d47800; border-color: #ffb800; }
+  .day-thu::before { background: linear-gradient(90deg, #ffb800, #ff6a00); }
+  .day-fri { background: #6a00d4; border-color: #b07eff; }
+  .day-fri::before { background: linear-gradient(90deg, #b07eff, #ff7eb3); }
+  .day-sat { background: #007a8a; border-color: #00d4e8; }
+  .day-sat::before { background: linear-gradient(90deg, #00d4e8, #00e5a0); }
+  .day-sun { background: #b50000; border-color: #ff5252; }
+  .day-sun::before { background: linear-gradient(90deg, #ff5252, #ff9f5a); }
+
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1.5px dashed rgba(255,255,255,0.3);
+  }
+
+  .day-title { font-size: 18px; font-weight: 800; color: white; }
+
+  .day-recipe {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-left: auto;
+    white-space: nowrap;
+    background: rgba(255,255,255,0.2);
+    color: white;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.6);
+    margin: 10px 0 6px;
+  }
+
+  .items-list { list-style: none; }
+
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 6px 6px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.15s;
+    position: relative;
+  }
+
+  .item:hover { background: rgba(255,255,255,0.15); }
+
+  .item input[type=checkbox] {
+    width: 18px; height: 18px;
+    accent-color: white;
+    cursor: pointer;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .item label {
+    font-size: 14px;
+    color: white;
+    cursor: pointer;
+    line-height: 1.4;
+    flex: 1;
+  }
+
+  .item input:checked + label {
+    text-decoration: line-through;
+    color: rgba(255,255,255,0.4);
+  }
+
+  .item .qty {
+    font-size: 11.5px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* delete button on custom items */
+  .del-btn {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.35);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0 2px;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: color 0.15s;
+  }
+  .del-btn:hover { color: rgba(255,255,255,0.85); }
+
+  /* add item row */
+  .add-row {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1.5px dashed rgba(255,255,255,0.2);
+  }
+
+  .add-input {
+    flex: 1;
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 10px;
+    border: 1.5px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.15);
+    color: white;
+    outline: none;
+    transition: border 0.15s, background 0.15s;
+    min-width: 0;
+  }
+
+  .add-input::placeholder { color: rgba(255,255,255,0.45); }
+  .add-input:focus { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.22); }
+
+  .add-btn {
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 10px;
+    border: 1.5px solid rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.2);
+    color: white;
+    cursor: pointer;
+    transition: background 0.15s;
+    flex-shrink: 0;
+  }
+
+  .add-btn:hover { background: rgba(255,255,255,0.35); }
+
+  .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1.5px dashed rgba(255,255,255,0.3);
+  }
+
+  .progress-bar {
+    flex: 1;
+    height: 7px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .progress-fill { height: 100%; border-radius: 10px; transition: width 0.3s; }
+  .mon-fill { background: linear-gradient(90deg, #ffcce6, #ffe0c0); }
+  .tue-fill { background: linear-gradient(90deg, #a0ffda, #d0ff90); }
+  .wed-fill { background: linear-gradient(90deg, #b8daff, #dfc8ff); }
+  .thu-fill { background: linear-gradient(90deg, #ffe066, #ffb347); }
+  .fri-fill { background: linear-gradient(90deg, #dfc8ff, #ffb3d9); }
+  .sat-fill { background: linear-gradient(90deg, #a0f0ff, #a0ffda); }
+  .sun-fill { background: linear-gradient(90deg, #ffb3b3, #ffcca0); }
+
+  .progress-txt { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.7); min-width: 30px; text-align: right; }
+
+  .total-bar {
+    background: #2a2a3e;
+    border-radius: 20px;
+    padding: 14px 20px;
+    margin-top: 16px;
+    border: 2px solid #ff7eb3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .total-txt { font-size: 14px; font-weight: 700; color: #ccc; }
+
+  .total-count {
+    font-size: 22px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #ff7eb3, #ffd166);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .reset-btn {
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 2px solid #ff7eb3;
+    background: transparent;
+    color: #ff7eb3;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .reset-btn:hover { background: #ff7eb3; color: white; }
+
+  /* loading overlay */
+  #loading {
+    position: fixed;
+    inset: 0;
+    background: #1a1a2e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    gap: 14px;
+    transition: opacity 0.4s;
+  }
+
+  #loading p {
+    color: #aaa;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .spinner {
+    width: 36px; height: 36px;
+    border: 3px solid rgba(255,126,179,0.2);
+    border-top-color: #ff7eb3;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (max-width: 480px) {
+    body { padding: 10px; }
+    .header h1 { font-size: 21px; }
+    .days-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div id="loading">
+  <div class="spinner"></div>
+  <p>Connecting to grocery list…</p>
+</div>
+
+<div class="header">
+  <div class="kawaii-strip">
+    <svg width="34" height="34" viewBox="0 0 36 36"><ellipse cx="18" cy="20" rx="12" ry="10" fill="#ff7eb3"/><ellipse cx="18" cy="19" rx="10" ry="8" fill="#ffa5c5"/><circle cx="14" cy="18" r="1.5" fill="#333"/><circle cx="22" cy="18" r="1.5" fill="#333"/><ellipse cx="18" cy="21" rx="3" ry="1.5" fill="#ff5c99"/><circle cx="12" cy="17" r="0.7" fill="white" opacity="0.7"/><circle cx="20" cy="17" r="0.7" fill="white" opacity="0.7"/><path d="M8 16 Q6 12 8 10 Q10 8 12 10" fill="#ff9f5a"/><path d="M28 16 Q30 12 28 10 Q26 8 24 10" fill="#ff9f5a"/></svg>
+    <svg width="34" height="34" viewBox="0 0 36 36"><ellipse cx="18" cy="22" rx="11" ry="9" fill="#7ecbff"/><ellipse cx="18" cy="21" rx="9" ry="7" fill="#a8dcff"/><circle cx="14" cy="20" r="1.5" fill="#333"/><circle cx="22" cy="20" r="1.5" fill="#333"/><ellipse cx="18" cy="23" rx="2.5" ry="1.2" fill="#5aadff"/><circle cx="12.5" cy="19.5" r="0.7" fill="white" opacity="0.8"/><circle cx="20.5" cy="19.5" r="0.7" fill="white" opacity="0.8"/><ellipse cx="18" cy="14" rx="6" ry="4" fill="#a8d96c"/><ellipse cx="18" cy="14" rx="4" ry="2.5" fill="#c5e897"/></svg>
+    <svg width="34" height="34" viewBox="0 0 36 36"><ellipse cx="18" cy="22" rx="12" ry="10" fill="#ffd166"/><ellipse cx="18" cy="21" rx="10" ry="8" fill="#ffe699"/><circle cx="14" cy="20" r="1.5" fill="#333"/><circle cx="22" cy="20" r="1.5" fill="#333"/><path d="M15 23 Q18 25 21 23" stroke="#e8a000" stroke-width="1.5" fill="none" stroke-linecap="round"/><circle cx="12.5" cy="19.5" r="0.6" fill="white" opacity="0.8"/><circle cx="20.5" cy="19.5" r="0.6" fill="white" opacity="0.8"/><rect x="14" y="11" width="8" height="3" rx="1.5" fill="#ffd166"/><circle cx="18" cy="9.5" r="1.5" fill="#ffb347"/></svg>
+    <svg width="34" height="34" viewBox="0 0 36 36"><ellipse cx="18" cy="21" rx="11" ry="9" fill="#5dbea3"/><ellipse cx="18" cy="20" rx="9" ry="7" fill="#7dd4bb"/><circle cx="14" cy="19" r="1.5" fill="#333"/><circle cx="22" cy="19" r="1.5" fill="#333"/><path d="M15 22 Q18 24 21 22" stroke="#3a8a74" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M12 14 Q14 10 18 10 Q22 10 24 14" fill="#a8d96c"/><path d="M14 13 Q16 9 18 9 Q20 9 22 13" fill="#c5e897"/></svg>
+    <svg width="34" height="34" viewBox="0 0 36 36"><rect x="8" y="14" width="20" height="16" rx="4" fill="#ff9f5a"/><rect x="9" y="15" width="18" height="12" rx="3" fill="#ffb974"/><circle cx="14" cy="21" r="1.5" fill="#333"/><circle cx="22" cy="21" r="1.5" fill="#333"/><path d="M15 24 Q18 26 21 24" stroke="#cc6600" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M13 14 Q13 8 18 8 Q23 8 23 14" fill="#ff7eb3"/></svg>
+  </div>
+  <h1>✨ Weekly Grocery List ✨</h1>
+  <p>Shared live — changes sync for everyone!</p>
+  <div style="display:flex;justify-content:center;margin-top:6px;">
+    <span class="sync-badge"><span class="sync-dot" id="syncDot"></span><span id="syncLabel">Connecting…</span></span>
+  </div>
+</div>
+
+<div class="days-grid" id="daysGrid">
+
+  <!-- MONDAY -->
+  <div class="day-card day-mon">
+    <div class="day-header">
+      <svg width="38" height="38" viewBox="0 0 38 38"><ellipse cx="19" cy="24" rx="13" ry="10" fill="#ff4da6"/><ellipse cx="19" cy="23" rx="11" ry="8" fill="#ff85c2"/><ellipse cx="14" cy="21" rx="2.5" ry="3.5" fill="#ffb3d9"/><ellipse cx="24" cy="21" rx="2.5" ry="3.5" fill="#ffb3d9"/><circle cx="15.5" cy="22" r="2" fill="#222"/><circle cx="22.5" cy="22" r="2" fill="#222"/><circle cx="16.2" cy="21.3" r="0.7" fill="white"/><circle cx="23.2" cy="21.3" r="0.7" fill="white"/><ellipse cx="19" cy="25" rx="3" ry="1.8" fill="#e8006a"/><path d="M10 18 Q8 13 11 11 Q14 9 15 13" fill="#ffb347"/><path d="M28 18 Q30 13 27 11 Q24 9 23 13" fill="#ffb347"/></svg>
+      <div>
+        <div class="day-title">Monday</div>
+        <div class="day-recipe">Special Pasta 🍝</div>
+      </div>
+    </div>
+    <div class="section-label">Produce</div>
+    <ul class="items-list" id="list-mon-produce" data-day="mon" data-section="produce">
+      <li class="item" data-key="kale"><input type="checkbox" id="mon-produce-kale"><label for="mon-produce-kale">Kale</label></li>
+      <li class="item" data-key="celery"><input type="checkbox" id="mon-produce-celery"><label for="mon-produce-celery">Celery</label></li>
+      <li class="item" data-key="carrots"><input type="checkbox" id="mon-produce-carrots"><label for="mon-produce-carrots">Carrots</label></li>
+      <li class="item" data-key="peppers"><input type="checkbox" id="mon-produce-peppers"><label for="mon-produce-peppers">Peppers</label></li>
+      <li class="item" data-key="cucumbers"><input type="checkbox" id="mon-produce-cucumbers"><label for="mon-produce-cucumbers">Cucumbers</label></li>
+      <li class="item" data-key="apples"><input type="checkbox" id="mon-produce-apples"><label for="mon-produce-apples">Apples</label></li>
+      <li class="item" data-key="bloodoranges"><input type="checkbox" id="mon-produce-bloodoranges"><label for="mon-produce-bloodoranges">Blood oranges</label></li>
+      <li class="item" data-key="berries"><input type="checkbox" id="mon-produce-berries"><label for="mon-produce-berries">Berries</label></li>
+    </ul>
+    <div class="section-label">Pantry</div>
+    <ul class="items-list" id="list-mon-pantry" data-day="mon" data-section="pantry">
+      <li class="item" data-key="rigatoni"><input type="checkbox" id="mon-pantry-rigatoni"><label for="mon-pantry-rigatoni">Rigatoni</label></li>
+      <li class="item" data-key="pastasauce"><input type="checkbox" id="mon-pantry-pastasauce"><label for="mon-pantry-pastasauce">Pasta sauce</label></li>
+      <li class="item" data-key="polpa"><input type="checkbox" id="mon-pantry-polpa"><label for="mon-pantry-polpa">Polpa crushed tomatoes</label></li>
+      <li class="item" data-key="tomatopaste"><input type="checkbox" id="mon-pantry-tomatopaste"><label for="mon-pantry-tomatopaste">Tomato paste</label></li>
+      <li class="item" data-key="bread"><input type="checkbox" id="mon-pantry-bread"><label for="mon-pantry-bread">Bread</label></li>
+    </ul>
+    <div class="add-row">
+      <input class="add-input" type="text" placeholder="Add item…" data-day="mon" data-section="extra">
+      <button class="add-btn" onclick="addItem(this)">+</button>
+    </div>
+    <ul class="items-list" id="list-mon-extra" data-day="mon" data-section="extra"></ul>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill mon-fill" id="mon-prog" style="width:0%"></div></div>
+      <div class="progress-txt" id="mon-pct">0%</div>
+    </div>
+  </div>
+
+  <!-- TUESDAY -->
+  <div class="day-card day-tue">
+    <div class="day-header">
+      <svg width="38" height="38" viewBox="0 0 38 38"><ellipse cx="19" cy="24" rx="14" ry="9" fill="#00c48a"/><ellipse cx="19" cy="22" rx="12" ry="7" fill="#4dddb0"/><circle cx="15.5" cy="21" r="2" fill="#222"/><circle cx="22.5" cy="21" r="2" fill="#222"/><circle cx="16.2" cy="20.3" r="0.7" fill="white"/><circle cx="23.2" cy="20.3" r="0.7" fill="white"/><path d="M16 24 Q19 26 22 24" stroke="#007a55" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M13 16 Q15 10 19 10 Q23 10 25 16" fill="#7ecb3a"/><path d="M15 15 Q17 10 19 10 Q21 10 23 15" fill="#b0e860"/><ellipse cx="19" cy="10" rx="2.5" ry="1.5" fill="#5aaa20"/></svg>
+      <div>
+        <div class="day-title">Tuesday</div>
+        <div class="day-recipe">Roasted Carrot Salad 🥕</div>
+      </div>
+    </div>
+    <div class="section-label">Produce</div>
+    <ul class="items-list" id="list-tue-produce" data-day="tue" data-section="produce">
+      <li class="item" data-key="rainbowcarrots"><input type="checkbox" id="tue-produce-rainbowcarrots"><label for="tue-produce-rainbowcarrots">Rainbow carrots <span class="qty">32 oz</span></label></li>
+      <li class="item" data-key="parsley"><input type="checkbox" id="tue-produce-parsley"><label for="tue-produce-parsley">Fresh parsley</label></li>
+      <li class="item" data-key="garlic"><input type="checkbox" id="tue-produce-garlic"><label for="tue-produce-garlic">Fresh garlic</label></li>
+      <li class="item" data-key="shallot"><input type="checkbox" id="tue-produce-shallot"><label for="tue-produce-shallot">Shallot</label></li>
+      <li class="item" data-key="pomegranate"><input type="checkbox" id="tue-produce-pomegranate"><label for="tue-produce-pomegranate">Pomegranate arils <span class="qty">½ cup</span></label></li>
+    </ul>
+    <div class="section-label">Pantry</div>
+    <ul class="items-list" id="list-tue-pantry" data-day="tue" data-section="pantry">
+      <li class="item" data-key="blacklentils"><input type="checkbox" id="tue-pantry-blacklentils"><label for="tue-pantry-blacklentils">Black lentils <span class="qty">4 cups cooked</span></label></li>
+      <li class="item" data-key="pistachios"><input type="checkbox" id="tue-pantry-pistachios"><label for="tue-pantry-pistachios">Pistachios, shelled <span class="qty">6 tbsp</span></label></li>
+      <li class="item" data-key="datesyrup"><input type="checkbox" id="tue-pantry-datesyrup"><label for="tue-pantry-datesyrup">Date syrup</label></li>
+      <li class="item" data-key="garlicpowder"><input type="checkbox" id="tue-pantry-garlicpowder"><label for="tue-pantry-garlicpowder">Garlic powder</label></li>
+      <li class="item" data-key="redwinevinegar"><input type="checkbox" id="tue-pantry-redwinevinegar"><label for="tue-pantry-redwinevinegar">Red wine vinegar <span class="qty">½ cup</span></label></li>
+      <li class="item" data-key="chilliflakes"><input type="checkbox" id="tue-pantry-chilliflakes"><label for="tue-pantry-chilliflakes">Red chili flakes</label></li>
+      <li class="item" data-key="oregano"><input type="checkbox" id="tue-pantry-oregano"><label for="tue-pantry-oregano">Dried oregano</label></li>
+      <li class="item" data-key="driedgarlic"><input type="checkbox" id="tue-pantry-driedgarlic"><label for="tue-pantry-driedgarlic">Dried garlic</label></li>
+    </ul>
+    <div class="add-row">
+      <input class="add-input" type="text" placeholder="Add item…" data-day="tue" data-section="extra">
+      <button class="add-btn" onclick="addItem(this)">+</button>
+    </div>
+    <ul class="items-list" id="list-tue-extra" data-day="tue" data-section="extra"></ul>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill tue-fill" id="tue-prog" style="width:0%"></div></div>
+      <div class="progress-txt" id="tue-pct">0%</div>
+    </div>
+  </div>
+
+  <!-- WEDNESDAY -->
+  <div class="day-card day-wed">
+    <div class="day-header">
+      <svg width="38" height="38" viewBox="0 0 38 38"><rect x="8" y="14" width="22" height="17" rx="5" fill="#5ba3ff"/><rect x="9" y="15" width="20" height="14" rx="4" fill="#8ec0ff"/><circle cx="15.5" cy="22" r="2" fill="#222"/><circle cx="22.5" cy="22" r="2" fill="#222"/><circle cx="16.2" cy="21.3" r="0.7" fill="white"/><circle cx="23.2" cy="21.3" r="0.7" fill="white"/><path d="M16 25 Q19 27 22 25" stroke="#2266cc" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M13 14 Q19 8 25 14" fill="#b07eff"/><ellipse cx="19" cy="10" rx="4" ry="2" fill="#cc99ff"/></svg>
+      <div>
+        <div class="day-title">Wednesday</div>
+        <div class="day-recipe">Tortillas + Prep 🌯</div>
+      </div>
+    </div>
+    <div class="section-label">Today</div>
+    <ul class="items-list" id="list-wed-today" data-day="wed" data-section="today">
+      <li class="item" data-key="tortillas"><input type="checkbox" id="wed-today-tortillas"><label for="wed-today-tortillas">Tortillas <span class="qty">Costco</span></label></li>
+      <li class="item" data-key="refriedbeans"><input type="checkbox" id="wed-today-refriedbeans"><label for="wed-today-refriedbeans">Refried beans</label></li>
+      <li class="item" data-key="salsa"><input type="checkbox" id="wed-today-salsa"><label for="wed-today-salsa">Salsa</label></li>
+    </ul>
+    <div class="section-label">Grab for Thursday</div>
+    <ul class="items-list" id="list-wed-thursday" data-day="wed" data-section="thursday">
+      <li class="item" data-key="bagels"><input type="checkbox" id="wed-thursday-bagels"><label for="wed-thursday-bagels">Bagels</label></li>
+      <li class="item" data-key="peanutbutter"><input type="checkbox" id="wed-thursday-peanutbutter"><label for="wed-thursday-peanutbutter">Peanut butter</label></li>
+      <li class="item" data-key="fruit"><input type="checkbox" id="wed-thursday-fruit"><label for="wed-thursday-fruit">Fruit</label></li>
+      <li class="item" data-key="veggies"><input type="checkbox" id="wed-thursday-veggies"><label for="wed-thursday-veggies">Veggies</label></li>
+    </ul>
+    <div class="add-row">
+      <input class="add-input" type="text" placeholder="Add item…" data-day="wed" data-section="extra">
+      <button class="add-btn" onclick="addItem(this)">+</button>
+    </div>
+    <ul class="items-list" id="list-wed-extra" data-day="wed" data-section="extra"></ul>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill wed-fill" id="wed-prog" style="width:0%"></div></div>
+      <div class="progress-txt" id="wed-pct">0%</div>
+    </div>
+  </div>
+
+  <!-- THURSDAY -->
+  <div class="day-card day-thu">
+    <div class="day-header">
+      <svg width="38" height="38" viewBox="0 0 38 38"><ellipse cx="19" cy="25" rx="14" ry="9" fill="#ffb800"/><ellipse cx="19" cy="23" rx="12" ry="7" fill="#ffda66"/><circle cx="15.5" cy="22" r="2" fill="#222"/><circle cx="22.5" cy="22" r="2" fill="#222"/><circle cx="16.2" cy="21.3" r="0.7" fill="white"/><circle cx="23.2" cy="21.3" r="0.7" fill="white"/><path d="M16 25 Q19 27 22 25" stroke="#a05800" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M13 17 L19 11 L25 17" fill="#ff6a00"/><rect x="16" y="11" width="6" height="6" rx="1" fill="#ff9340"/></svg>
+      <div>
+        <div class="day-title">Thursday</div>
+        <div class="day-recipe">Layered Mexican Salad 🥑</div>
+      </div>
+    </div>
+    <div class="section-label">Produce</div>
+    <ul class="items-list" id="list-thu-produce" data-day="thu" data-section="produce">
+      <li class="item" data-key="romaine"><input type="checkbox" id="thu-produce-romaine"><label for="thu-produce-romaine">Romaine lettuce</label></li>
+      <li class="item" data-key="tomatoes"><input type="checkbox" id="thu-produce-tomatoes"><label for="thu-produce-tomatoes">Beefsteak tomatoes <span class="qty">4 large</span></label></li>
+      <li class="item" data-key="whiteonion"><input type="checkbox" id="thu-produce-whiteonion"><label for="thu-produce-whiteonion">White onion</label></li>
+      <li class="item" data-key="cilantro"><input type="checkbox" id="thu-produce-cilantro"><label for="thu-produce-cilantro">Fresh cilantro</label></li>
+      <li class="item" data-key="limes"><input type="checkbox" id="thu-produce-limes"><label for="thu-produce-limes">Limes <span class="qty">4</span></label></li>
+      <li class="item" data-key="bellpeppers"><input type="checkbox" id="thu-produce-bellpeppers"><label for="thu-produce-bellpeppers">Orange bell peppers <span class="qty">2 large</span></label></li>
+      <li class="item" data-key="avocados"><input type="checkbox" id="thu-produce-avocados"><label for="thu-produce-avocados">Avocados <span class="qty">4 large + 4 for dressing</span></label></li>
+      <li class="item" data-key="freshgarlic"><input type="checkbox" id="thu-produce-freshgarlic"><label for="thu-produce-freshgarlic">Fresh garlic</label></li>
+    </ul>
+    <div class="section-label">Pantry</div>
+    <ul class="items-list" id="list-thu-pantry" data-day="thu" data-section="pantry">
+      <li class="item" data-key="lentils"><input type="checkbox" id="thu-pantry-lentils"><label for="thu-pantry-lentils">Black or brown lentils <span class="qty">6 cups cooked</span></label></li>
+      <li class="item" data-key="brownrice"><input type="checkbox" id="thu-pantry-brownrice"><label for="thu-pantry-brownrice">Brown rice <span class="qty">4 cups</span></label></li>
+      <li class="item" data-key="salsa"><input type="checkbox" id="thu-pantry-salsa"><label for="thu-pantry-salsa">Salsa</label></li>
+      <li class="item" data-key="frozencorin"><input type="checkbox" id="thu-pantry-frozencorin"><label for="thu-pantry-frozencorin">Frozen corn</label></li>
+      <li class="item" data-key="blackolives"><input type="checkbox" id="thu-pantry-blackolives"><label for="thu-pantry-blackolives">Black olives <span class="qty">2 cups</span></label></li>
+      <li class="item" data-key="cashews"><input type="checkbox" id="thu-pantry-cashews"><label for="thu-pantry-cashews">Cashews <span class="qty">½ cup</span></label></li>
+      <li class="item" data-key="limejuice"><input type="checkbox" id="thu-pantry-limejuice"><label for="thu-pantry-limejuice">Lime juice <span class="qty">½ cup</span></label></li>
+      <li class="item" data-key="oliveoil"><input type="checkbox" id="thu-pantry-oliveoil"><label for="thu-pantry-oliveoil">Olive oil <span class="qty">½ cup</span></label></li>
+      <li class="item" data-key="acv"><input type="checkbox" id="thu-pantry-acv"><label for="thu-pantry-acv">Apple cider vinegar <span class="qty">4 tbsp</span></label></li>
+      <li class="item" data-key="jalapeno"><input type="checkbox" id="thu-pantry-jalapeno"><label for="thu-pantry-jalapeno">Marinated jalapeño slices + brine</label></li>
+    </ul>
+    <div class="section-label">Spices</div>
+    <ul class="items-list" id="list-thu-spices" data-day="thu" data-section="spices">
+      <li class="item" data-key="chilipowder"><input type="checkbox" id="thu-spices-chilipowder"><label for="thu-spices-chilipowder">Chili powder</label></li>
+      <li class="item" data-key="cumin"><input type="checkbox" id="thu-spices-cumin"><label for="thu-spices-cumin">Ground cumin</label></li>
+      <li class="item" data-key="paprika"><input type="checkbox" id="thu-spices-paprika"><label for="thu-spices-paprika">Smoked paprika</label></li>
+      <li class="item" data-key="garlicpowder"><input type="checkbox" id="thu-spices-garlicpowder"><label for="thu-spices-garlicpowder">Garlic powder</label></li>
+    </ul>
+    <div class="add-row">
+      <input class="add-input" type="text" placeholder="Add item…" data-day="thu" data-section="extra">
+      <button class="add-btn" onclick="addItem(this)">+</button>
+    </div>
+    <ul class="items-list" id="list-thu-extra" data-day="thu" data-section="extra"></ul>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill thu-fill" id="thu-prog" style="width:0%"></div></div>
+      <div class="progress-txt" id="thu-pct">0%</div>
+    </div>
+  </div>
+
+
+  <!-- FRIDAY -->
+  <div class="day-card day-fri">
+    <div class="day-header">
+      <svg width="38" height="38" viewBox="0 0 38 38"><ellipse cx="19" cy="24" rx="13" ry="10" fill="#b07eff"/><ellipse cx="19" cy="23" rx="11" ry="8" fill="#cca0ff"/><ellipse cx="14" cy="21" rx="2.5" ry="3.5" fill="#e0c8ff"/><ellipse cx="24" cy="21" rx="2.5" ry="3.5" fill="#e0c8ff"/><circle cx="15.5" cy="22" r="2" fill="#222"/><circle cx="22.5" cy="22" r="2" fill="#222"/><circle cx="16.2" cy="21.3" r="0.7" fill="white"/><circle cx="23.2" cy="21.3" r="0.7" fill="white"/><ellipse cx="19" cy="25" rx="3" ry="1.8" fill="#8800cc"/><path d="M10 18 Q8 13 11 11 Q14 9 15 13" fill="#ff7eb3"/><path d="M28 18 Q30 13 27 11 Q24 9 23 13" fill="#ff7eb3"/></svg>
+      <div>
+        <div class="day-title">Friday</div>
+        <div class="day-recipe">Add your meal 🍽️</div>
+      </div>
+    </div>
+    <div class="section-label">Items</div>
+    <ul class="items-list" id="list-fri-items" data-day="fri" data-section="items"></ul>
+    <div class="add-row">
+      <input class="add-input" type="text" placeholder="Add item…" data-day="fri" data-section="extra">
+      <button class="add-btn" onclick="addItem(this)">+</button>
+    </div>
+    <ul class="items-list" id="list-fri-extra" data-day="fri" data-section="extra"></ul>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill fri-fill" id="fri-prog" style="width:0%"></div></div>
+      <div class="progress-txt" id="fri-pct">0%</div>
+    </div>
+  </div>
+
+  <!-- SATURDAY -->
+  <div class="day-card day-sat">
+    <div class="day-header">
+      <svg width="38" height="38" viewBox="0 0 38 38"><ellipse cx="19" cy="24" rx="13" ry="10" fill="#00d4e8"/><ellipse cx="19" cy="23" rx="11" ry="8" fill="#60e8f5"/><ellipse cx="14" cy="21" rx="2.5" ry="3.5" fill="#a0f5ff"/><ellipse cx="24" cy="21" rx="2.5" ry="3.5" fill="#a0f5ff"/><circle cx="15.5" cy="22" r="2" fill="#222"/><circle cx="22.5" cy="22" r="2" fill="#222"/><circle cx="16.2" cy="21.3" r="0.7" fill="white"/><circle cx="23.2" cy="21.3" r="0.7" fill="white"/><ellipse cx="19" cy="25" rx="3" ry="1.8" fill="#007a8a"/><path d="M10 18 Q8 13 11 11 Q14 9 15 13" fill="#00e5a0"/><path d="M28 18 Q30 13 27 11 Q24 9 23 13" fill="#00e5a0"/></svg>
+      <div>
+        <div class="day-title">Saturday</div>
+        <div class="day-recipe">Add your meal 🍽️</div>
+      </div>
+    </div>
+    <div class="section-label">Items</div>
+    <ul class="items-list" id="list-sat-items" data-day="sat" data-section="items"></ul>
+    <div class="add-row">
+      <input class="add-input" type="text" placeholder="Add item…" data-day="sat" data-section="extra">
+      <button class="add-btn" onclick="addItem(this)">+</button>
+    </div>
+    <ul class="items-list" id="list-sat-extra" data-day="sat" data-section="extra"></ul>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill sat-fill" id="sat-prog" style="width:0%"></div></div>
+      <div class="progress-txt" id="sat-pct">0%</div>
+    </div>
+  </div>
+
+  <!-- SUNDAY -->
+  <div class="day-card day-sun">
+    <div class="day-header">
+      <svg width="38" height="38" viewBox="0 0 38 38"><ellipse cx="19" cy="24" rx="13" ry="10" fill="#ff5252"/><ellipse cx="19" cy="23" rx="11" ry="8" fill="#ff8080"/><ellipse cx="14" cy="21" rx="2.5" ry="3.5" fill="#ffb3b3"/><ellipse cx="24" cy="21" rx="2.5" ry="3.5" fill="#ffb3b3"/><circle cx="15.5" cy="22" r="2" fill="#222"/><circle cx="22.5" cy="22" r="2" fill="#222"/><circle cx="16.2" cy="21.3" r="0.7" fill="white"/><circle cx="23.2" cy="21.3" r="0.7" fill="white"/><ellipse cx="19" cy="25" rx="3" ry="1.8" fill="#900000"/><path d="M10 18 Q8 13 11 11 Q14 9 15 13" fill="#ff9f5a"/><path d="M28 18 Q30 13 27 11 Q24 9 23 13" fill="#ff9f5a"/></svg>
+      <div>
+        <div class="day-title">Sunday</div>
+        <div class="day-recipe">Add your meal 🍽️</div>
+      </div>
+    </div>
+    <div class="section-label">Items</div>
+    <ul class="items-list" id="list-sun-items" data-day="sun" data-section="items"></ul>
+    <div class="add-row">
+      <input class="add-input" type="text" placeholder="Add item…" data-day="sun" data-section="extra">
+      <button class="add-btn" onclick="addItem(this)">+</button>
+    </div>
+    <ul class="items-list" id="list-sun-extra" data-day="sun" data-section="extra"></ul>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill sun-fill" id="sun-prog" style="width:0%"></div></div>
+      <div class="progress-txt" id="sun-pct">0%</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="total-bar">
+  <div>
+    <div class="total-txt">Total items checked</div>
+    <div class="total-count" id="total-count">0 / 0</div>
+  </div>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+    <div style="font-size:22px">🛒</div>
+    <button class="reset-btn" onclick="confirmReset()">Reset all</button>
+  </div>
+</div>
+
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, onValue, set, remove, push } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCqLvPickUwIY2M5CQRfrndkUKwrOVSY1M",
+    authDomain: "art104-nature-interactive-lect.firebaseapp.com",
+    databaseURL: "https://art104-nature-interactive-lect-default-rtdb.firebaseio.com",
+    projectId: "art104-nature-interactive-lect",
+    storageBucket: "art104-nature-interactive-lect.firebasestorage.app",
+    messagingSenderId: "27298236678",
+    appId: "1:27298236678:web:7113d481f512e8c66d3687"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const ROOT = "grocerylist_weekly";
+
+  const syncDot = document.getElementById('syncDot');
+  const syncLabel = document.getElementById('syncLabel');
+
+  function setLive() {
+    syncDot.className = 'sync-dot live';
+    syncLabel.textContent = 'Live — syncing';
+  }
+
+  function setSaving() {
+    syncDot.className = 'sync-dot saving';
+    syncLabel.textContent = 'Saving…';
+  }
+
+  // Hide loading once connected
+  let loaded = false;
+  function hideLoading() {
+    if (loaded) return;
+    loaded = true;
+    const el = document.getElementById('loading');
+    el.style.opacity = '0';
+    setTimeout(() => el.remove(), 400);
+    setLive();
+  }
+
+  // Track remote updates to avoid echo
+  let ignoreNext = new Set();
+
+  // ── CHECKBOXES (built-in items) ──────────────────────────────────────
+  // Listen to all checkbox state from Firebase
+  const checksRef = ref(db, `${ROOT}/checks`);
+  onValue(checksRef, snap => {
+    const data = snap.val() || {};
+    document.querySelectorAll('.items-list[data-day] input[type=checkbox]').forEach(cb => {
+      if (!cb.id) return;
+      cb.checked = !!(data[cb.id]);
+    });
+    updateAllProgress();
+    hideLoading();
+  });
+
+  // When user taps a checkbox, write to Firebase
+  document.addEventListener('change', e => {
+    if (e.target.type !== 'checkbox') return;
+    const id = e.target.id;
+    if (!id) return;
+    setSaving();
+    set(ref(db, `${ROOT}/checks/${id}`), e.target.checked ? true : null)
+      .then(() => setLive());
+  });
+
+  // ── CUSTOM (EXTRA) ITEMS ─────────────────────────────────────────────
+  const days = ['mon','tue','wed','thu','fri','sat','sun'];
+
+  days.forEach(day => {
+    const extraRef = ref(db, `${ROOT}/extras/${day}`);
+    onValue(extraRef, snap => {
+      const ul = document.getElementById(`list-${day}-extra`);
+      if (!ul) return;
+      ul.innerHTML = '';
+      const data = snap.val() || {};
+      Object.entries(data).forEach(([fbKey, item]) => {
+        if (!item || !item.text) return;
+        appendExtraItem(ul, day, fbKey, item.text, item.checked);
+      });
+      updateAllProgress();
+    });
+  });
+
+  function appendExtraItem(ul, day, fbKey, text, checked) {
+    const li = document.createElement('li');
+    li.className = 'item';
+    li.dataset.fbkey = fbKey;
+
+    const cbId = `extra-${day}-${fbKey}`;
+    const cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.id = cbId;
+    cb.checked = !!checked;
+    cb.addEventListener('change', () => {
+      setSaving();
+      set(ref(db, `${ROOT}/extras/${day}/${fbKey}/checked`), cb.checked)
+        .then(() => setLive());
+      updateAllProgress();
+    });
+
+    const lbl = document.createElement('label');
+    lbl.htmlFor = cbId;
+    lbl.textContent = text;
+    if (checked) lbl.style.textDecoration = 'line-through';
+
+    const del = document.createElement('button');
+    del.className = 'del-btn';
+    del.textContent = '×';
+    del.title = 'Remove item';
+    del.addEventListener('click', () => {
+      setSaving();
+      remove(ref(db, `${ROOT}/extras/${day}/${fbKey}`))
+        .then(() => setLive());
+    });
+
+    li.appendChild(cb);
+    li.appendChild(lbl);
+    li.appendChild(del);
+    ul.appendChild(li);
+  }
+
+  // Expose addItem globally
+  window.addItem = function(btn) {
+    const row = btn.parentElement;
+    const input = row.querySelector('.add-input');
+    const text = input.value.trim();
+    if (!text) return;
+    const day = input.dataset.day;
+    setSaving();
+    push(ref(db, `${ROOT}/extras/${day}`), { text, checked: false })
+      .then(() => setLive());
+    input.value = '';
+    input.focus();
+  };
+
+  // Allow Enter key in add input
+  document.querySelectorAll('.add-input').forEach(inp => {
+    inp.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        const btn = inp.parentElement.querySelector('.add-btn');
+        window.addItem(btn);
+      }
+    });
+  });
+
+  // ── PROGRESS ─────────────────────────────────────────────────────────
+  function updateAllProgress() {
+    let gc = 0, gt = 0;
+    days.forEach(day => {
+      const card = document.querySelector(`.day-${day}`);
+      const boxes = card ? card.querySelectorAll('input[type=checkbox]') : [];
+      const checked = [...boxes].filter(b => b.checked).length;
+      const total = boxes.length;
+      const pct = total ? Math.round(checked / total * 100) : 0;
+      const prog = document.getElementById(`${day}-prog`);
+      const pctEl = document.getElementById(`${day}-pct`);
+      if (prog) prog.style.width = pct + '%';
+      if (pctEl) pctEl.textContent = pct + '%';
+      gc += checked; gt += total;
+    });
+    const tc = document.getElementById('total-count');
+    if (tc) tc.textContent = `${gc} / ${gt}`;
+  }
+
+  // ── RESET ─────────────────────────────────────────────────────────────
+  window.confirmReset = function() {
+    if (!confirm('Reset all checkboxes for everyone?\n(Custom items will stay.)')) return;
+    setSaving();
+    // Clear all checks
+    set(ref(db, `${ROOT}/checks`), null).then(() => setLive());
+  };
+
+</script>
+</body>
+</html>
