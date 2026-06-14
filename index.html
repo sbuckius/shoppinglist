@@ -9,150 +9,113 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Nunito', sans-serif; background: #1a1a2e; min-height: 100vh; padding: 16px 16px 48px; }
 
-/* HEADER */
-.header { text-align: center; margin-bottom: 20px; padding: 16px; background: #2a2a3e; border-radius: 24px; border: 2px solid #ff7eb3; }
-.header h1 { font-size: 24px; font-weight: 800; background: linear-gradient(90deg,#ff7eb3,#ff9f5a,#ffd166,#7ecbff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-.header p { font-size: 13px; color: #aaa; margin-top: 4px; }
+.header { text-align:center; margin-bottom:20px; padding:16px; background:#2a2a3e; border-radius:24px; border:2px solid #ff7eb3; }
+.header h1 { font-size:24px; font-weight:800; background:linear-gradient(90deg,#ff7eb3,#ff9f5a,#ffd166,#7ecbff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.header p { font-size:13px; color:#aaa; margin-top:4px; }
 .kawaii-strip { display:flex; justify-content:center; gap:6px; margin:10px 0 6px; flex-wrap:wrap; }
 .sync-badge { display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:700; padding:3px 10px; border-radius:20px; margin-top:6px; color:#aaa; background:rgba(255,255,255,0.07); }
 .sync-dot { width:7px; height:7px; border-radius:50%; background:#888; transition:background 0.3s; }
 .sync-dot.live { background:#00e5a0; }
 .sync-dot.saving { background:#ffd166; animation:pulse 0.6s infinite alternate; }
-@keyframes pulse { from{opacity:1} to{opacity:0.3} }
+@keyframes pulse{from{opacity:1}to{opacity:0.3}}
 
-/* SHOPPING SECTION */
-.trip-section { margin-bottom: 24px; }
+.trip-section { margin-bottom:24px; }
 .trip-title { font-size:13px; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:rgba(255,255,255,0.4); padding-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:12px; }
 .store-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:12px; }
 .store-card { border-radius:16px; padding:14px; border:2px solid transparent; position:relative; }
 .store-card::before { content:''; position:absolute; top:0;left:0;right:0; height:4px; border-radius:16px 16px 0 0; }
-.sc-costco  { background:#002a6b; border-color:#0057a8; } .sc-costco::before  { background:linear-gradient(90deg,#0057a8,#4a90e2); }
-.sc-newleaf { background:#0d3300; border-color:#2d7a2d; } .sc-newleaf::before { background:linear-gradient(90deg,#2d7a2d,#7ecb3a); }
-.sc-either  { background:#280d3d; border-color:#7a2d7a; } .sc-either::before  { background:linear-gradient(90deg,#7a2d7a,#b07eff); }
-.sc-foodbin { background:#3d1a00; border-color:#b85c00; } .sc-foodbin::before { background:linear-gradient(90deg,#b85c00,#ff9f5a); }
-.sc-safeway { background:#3d0004; border-color:#c8000a; } .sc-safeway::before { background:linear-gradient(90deg,#c8000a,#ff5252); }
-.sc-unknown { background:#1a1a2e; border-color:#444;    } .sc-unknown::before { background:linear-gradient(90deg,#444,#777); }
-.store-card-head { display:flex; align-items:center; gap:8px; margin-bottom:10px; padding-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.12); }
-.store-card-icon { font-size:22px; }
-.store-card-name { font-size:14px; font-weight:800; color:white; }
-.store-card-count { margin-left:auto; font-size:11px; font-weight:700; padding:2px 8px; border-radius:20px; background:rgba(255,255,255,0.15); color:white; }
+.sc-costco{background:#002a6b;border-color:#0057a8}.sc-costco::before{background:linear-gradient(90deg,#0057a8,#4a90e2)}
+.sc-newleaf{background:#0d3300;border-color:#2d7a2d}.sc-newleaf::before{background:linear-gradient(90deg,#2d7a2d,#7ecb3a)}
+.sc-either{background:#280d3d;border-color:#7a2d7a}.sc-either::before{background:linear-gradient(90deg,#7a2d7a,#b07eff)}
+.sc-foodbin{background:#3d1a00;border-color:#b85c00}.sc-foodbin::before{background:linear-gradient(90deg,#b85c00,#ff9f5a)}
+.sc-safeway{background:#3d0004;border-color:#c8000a}.sc-safeway::before{background:linear-gradient(90deg,#c8000a,#ff5252)}
+.sc-unknown{background:#1e1e2e;border-color:#444}.sc-unknown::before{background:linear-gradient(90deg,#444,#777)}
+.sc-head { display:flex; align-items:center; gap:8px; margin-bottom:10px; padding-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.12); }
+.sc-icon { font-size:20px; }
+.sc-name { font-size:13px; font-weight:800; color:white; flex:1; }
+.sc-cnt { font-size:11px; font-weight:700; padding:2px 8px; border-radius:20px; background:rgba(255,255,255,0.15); color:white; }
 .aisle-lbl { font-size:9px; font-weight:800; text-transform:uppercase; letter-spacing:0.12em; color:rgba(255,255,255,0.4); margin:8px 0 3px; }
-.shop-item { display:flex; gap:5px; align-items:baseline; font-size:12.5px; color:rgba(255,255,255,0.88); padding:2px 0; flex-wrap:wrap; }
-.shop-item::before { content:'•'; color:rgba(255,255,255,0.25); flex-shrink:0; }
+.sh-item { display:flex; gap:5px; align-items:baseline; font-size:12px; color:rgba(255,255,255,0.88); padding:2px 0; flex-wrap:wrap; }
+.sh-item::before { content:'•'; color:rgba(255,255,255,0.25); flex-shrink:0; }
 .s-day  { font-size:9px; font-weight:700; padding:1px 5px; border-radius:10px; background:rgba(255,255,255,0.13); color:rgba(255,255,255,0.55); white-space:nowrap; }
 .s-meal { font-size:9px; font-weight:700; padding:1px 5px; border-radius:10px; background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.4); white-space:nowrap; }
 .s-qty  { font-size:10px; color:rgba(255,255,255,0.4); font-weight:600; }
-.shop-none { font-size:12px; color:rgba(255,255,255,0.25); font-style:italic; padding:6px 0; }
-.shop-done { font-size:12px; color:#00e5a0; font-weight:700; padding:6px 0; }
+.sh-none { font-size:11px; color:rgba(255,255,255,0.25); font-style:italic; padding:4px 0; }
 
-/* DAY CARDS */
 .days-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; }
 .day-card { border-radius:20px; padding:16px; border:3px solid transparent; position:relative; }
 .day-card::before { content:''; position:absolute; top:0;left:0;right:0; height:5px; border-radius:20px 20px 0 0; }
-.day-mon { background:#e8006a; border-color:#ff4da6; } .day-mon::before { background:linear-gradient(90deg,#ff4da6,#ff9f5a); }
-.day-tue { background:#008a5e; border-color:#00c48a; } .day-tue::before { background:linear-gradient(90deg,#00c48a,#7ecb3a); }
-.day-wed { background:#1a5fc8; border-color:#5ba3ff; } .day-wed::before { background:linear-gradient(90deg,#5ba3ff,#b07eff); }
-.day-thu { background:#d47800; border-color:#ffb800; } .day-thu::before { background:linear-gradient(90deg,#ffb800,#ff6a00); }
-.day-fri { background:#6a00d4; border-color:#b07eff; } .day-fri::before { background:linear-gradient(90deg,#b07eff,#ff7eb3); }
-.day-sat { background:#007a8a; border-color:#00d4e8; } .day-sat::before { background:linear-gradient(90deg,#00d4e8,#00e5a0); }
-.day-sun { background:#b50000; border-color:#ff5252; } .day-sun::before { background:linear-gradient(90deg,#ff5252,#ff9f5a); }
-.day-header { display:flex; align-items:center; gap:10px; margin-bottom:14px; padding-bottom:10px; border-bottom:1.5px dashed rgba(255,255,255,0.3); }
+.day-mon{background:#e8006a;border-color:#ff4da6}.day-mon::before{background:linear-gradient(90deg,#ff4da6,#ff9f5a)}
+.day-tue{background:#008a5e;border-color:#00c48a}.day-tue::before{background:linear-gradient(90deg,#00c48a,#7ecb3a)}
+.day-wed{background:#1a5fc8;border-color:#5ba3ff}.day-wed::before{background:linear-gradient(90deg,#5ba3ff,#b07eff)}
+.day-thu{background:#d47800;border-color:#ffb800}.day-thu::before{background:linear-gradient(90deg,#ffb800,#ff6a00)}
+.day-fri{background:#6a00d4;border-color:#b07eff}.day-fri::before{background:linear-gradient(90deg,#b07eff,#ff7eb3)}
+.day-sat{background:#007a8a;border-color:#00d4e8}.day-sat::before{background:linear-gradient(90deg,#00d4e8,#00e5a0)}
+.day-sun{background:#b50000;border-color:#ff5252}.day-sun::before{background:linear-gradient(90deg,#ff5252,#ff9f5a)}
+.day-hdr { display:flex; align-items:center; gap:10px; margin-bottom:14px; padding-bottom:10px; border-bottom:1.5px dashed rgba(255,255,255,0.3); }
 .day-title { font-size:18px; font-weight:800; color:white; }
 
-/* MEAL BLOCK */
 .meal-block { margin-bottom:8px; background:rgba(0,0,0,0.18); border-radius:12px; }
-.meal-hdr { display:flex; align-items:center; gap:8px; padding:8px 12px; cursor:pointer; user-select:none; }
+.meal-hdr { display:flex; align-items:center; gap:8px; padding:8px 12px; cursor:pointer; user-select:none; border-radius:12px; }
 .meal-hdr:hover { background:rgba(255,255,255,0.07); }
 .meal-emoji { font-size:15px; flex-shrink:0; }
 .meal-lbl { font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:rgba(255,255,255,0.75); flex:1; }
-.meal-recipe { font-size:11px; font-weight:600; color:rgba(255,255,255,0.4); font-style:italic; max-width:130px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.meal-recipe-display { font-size:11px; color:rgba(255,255,255,0.4); font-style:italic; max-width:130px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .meal-arrow { font-size:11px; color:rgba(255,255,255,0.3); transition:transform 0.2s; flex-shrink:0; }
 .meal-arrow.open { transform:rotate(180deg); }
-.meal-body { display:none; padding:6px 10px 10px; border-top:1px solid rgba(255,255,255,0.08); }
+.meal-body { display:none; padding:8px 12px 12px; border-top:1px solid rgba(255,255,255,0.08); }
 .meal-body.open { display:block; }
 
-/* RECIPE NAME */
-.recipe-row { margin-bottom:8px; }
-.recipe-inp {
-  width:100%; font-family:'Nunito',sans-serif; font-size:12px; font-style:italic; font-weight:600;
-  padding:5px 10px; border-radius:8px; border:1.5px solid rgba(255,255,255,0.2);
-  background:rgba(255,255,255,0.1); color:white; outline:none;
-}
+.recipe-inp { width:100%; font-family:'Nunito',sans-serif; font-size:12px; font-style:italic; font-weight:600; padding:5px 10px; border-radius:8px; border:1.5px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.1); color:white; outline:none; margin-bottom:8px; display:block; }
 .recipe-inp::placeholder { color:rgba(255,255,255,0.3); }
 .recipe-inp:focus { border-color:rgba(255,255,255,0.5); }
 
-/* ITEMS */
-.items-ul { list-style:none; margin-bottom:6px; }
-.item-li { display:flex; align-items:flex-start; gap:7px; padding:5px 3px; border-radius:8px; }
-.item-li:hover { background:rgba(255,255,255,0.1); }
-.item-cb { width:17px; height:17px; accent-color:white; cursor:pointer; margin-top:2px; flex-shrink:0; }
-.item-body { display:flex; flex-direction:column; flex:1; min-width:0; }
-.item-lbl { font-size:13.5px; color:white; cursor:pointer; line-height:1.4; }
+.items-ul { list-style:none; min-height:0; }
+.item-li { display:flex; align-items:flex-start; gap:8px; padding:5px 2px; border-radius:8px; }
+.item-li:hover { background:rgba(255,255,255,0.08); }
+.item-cb { width:18px; height:18px; accent-color:white; cursor:pointer; margin-top:1px; flex-shrink:0; }
+.item-body { flex:1; min-width:0; }
+.item-lbl { font-size:13.5px; color:white; line-height:1.4; display:block; cursor:pointer; }
 .item-lbl.done { text-decoration:line-through; color:rgba(255,255,255,0.35); }
-.item-qty { font-size:11px; color:rgba(255,255,255,0.5); font-weight:600; }
-.item-stores { display:flex; gap:4px; flex-wrap:wrap; margin-top:3px; }
-.store-pill {
-  font-family:'Nunito',sans-serif; font-size:10px; font-weight:700;
-  padding:2px 7px; border-radius:20px; border:1.5px solid rgba(255,255,255,0.2);
-  background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.45);
-  cursor:pointer; transition:all 0.15s; white-space:nowrap;
-}
+.item-qty { font-size:11px; color:rgba(255,255,255,0.5); font-weight:600; display:block; }
+.item-stores { display:flex; gap:4px; flex-wrap:wrap; margin-top:4px; }
+.store-pill { font-family:'Nunito',sans-serif; font-size:10px; font-weight:700; padding:2px 7px; border-radius:20px; border:1.5px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.07); color:rgba(255,255,255,0.45); cursor:pointer; transition:all 0.15s; white-space:nowrap; }
 .store-pill:hover { background:rgba(255,255,255,0.15); color:white; }
 .store-pill.on { border-color:transparent; color:white; }
-.store-pill.on.sp-costco  { background:#0057a8; }
-.store-pill.on.sp-newleaf { background:#2d7a2d; }
-.store-pill.on.sp-either  { background:#7a2d7a; }
-.store-pill.on.sp-foodbin { background:#b85c00; }
-.store-pill.on.sp-safeway { background:#c8000a; }
-.item-del { background:none; border:none; color:rgba(255,255,255,0.28); font-size:16px; cursor:pointer; padding:0 2px; flex-shrink:0; transition:color 0.15s; }
+.store-pill.on.sp-costco{background:#0057a8}.store-pill.on.sp-newleaf{background:#2d7a2d}
+.store-pill.on.sp-either{background:#7a2d7a}.store-pill.on.sp-foodbin{background:#b85c00}
+.store-pill.on.sp-safeway{background:#c8000a}
+.item-del { background:none; border:none; color:rgba(255,255,255,0.28); font-size:18px; cursor:pointer; padding:0 2px; flex-shrink:0; line-height:1; }
 .item-del:hover { color:rgba(255,255,255,0.8); }
 
-/* ADD ROW */
-.add-row { display:flex; gap:6px; margin-top:6px; }
-.add-inp {
-  flex:1; font-family:'Nunito',sans-serif; font-size:13px; font-weight:600;
-  padding:6px 10px; border-radius:10px; border:1.5px solid rgba(255,255,255,0.25);
-  background:rgba(255,255,255,0.12); color:white; outline:none; min-width:0;
-}
+.add-row { display:flex; gap:6px; margin-top:8px; }
+.add-inp { flex:1; font-family:'Nunito',sans-serif; font-size:13px; font-weight:600; padding:7px 10px; border-radius:10px; border:1.5px solid rgba(255,255,255,0.25); background:rgba(255,255,255,0.12); color:white; outline:none; min-width:0; }
 .add-inp::placeholder { color:rgba(255,255,255,0.4); }
 .add-inp:focus { border-color:rgba(255,255,255,0.6); background:rgba(255,255,255,0.18); }
-.add-btn {
-  font-family:'Nunito',sans-serif; font-size:18px; font-weight:800;
-  padding:4px 12px; border-radius:10px; border:1.5px solid rgba(255,255,255,0.35);
-  background:rgba(255,255,255,0.18); color:white; cursor:pointer;
-}
+.add-btn { font-family:'Nunito',sans-serif; font-size:20px; font-weight:800; padding:4px 14px; border-radius:10px; border:1.5px solid rgba(255,255,255,0.35); background:rgba(255,255,255,0.18); color:white; cursor:pointer; flex-shrink:0; }
 .add-btn:hover { background:rgba(255,255,255,0.28); }
 
-/* OTHER BLOCK */
-.other-block { margin-top:8px; background:rgba(0,0,0,0.25); border-radius:12px; }
-
-/* PROGRESS */
 .prog-wrap { display:flex; align-items:center; gap:8px; margin-top:14px; padding-top:10px; border-top:1.5px dashed rgba(255,255,255,0.22); }
-.prog-bar  { flex:1; height:7px; background:rgba(255,255,255,0.18); border-radius:10px; overflow:hidden; }
+.prog-bar { flex:1; height:7px; background:rgba(255,255,255,0.18); border-radius:10px; }
 .prog-fill { height:100%; border-radius:10px; transition:width 0.3s; }
-.pf-mon { background:linear-gradient(90deg,#ffcce6,#ffe0c0); }
-.pf-tue { background:linear-gradient(90deg,#a0ffda,#d0ff90); }
-.pf-wed { background:linear-gradient(90deg,#b8daff,#dfc8ff); }
-.pf-thu { background:linear-gradient(90deg,#ffe066,#ffb347); }
-.pf-fri { background:linear-gradient(90deg,#dfc8ff,#ffb3d9); }
-.pf-sat { background:linear-gradient(90deg,#a0f0ff,#a0ffda); }
-.pf-sun { background:linear-gradient(90deg,#ffb3b3,#ffcca0); }
+.pf-mon{background:linear-gradient(90deg,#ffcce6,#ffe0c0)}.pf-tue{background:linear-gradient(90deg,#a0ffda,#d0ff90)}
+.pf-wed{background:linear-gradient(90deg,#b8daff,#dfc8ff)}.pf-thu{background:linear-gradient(90deg,#ffe066,#ffb347)}
+.pf-fri{background:linear-gradient(90deg,#dfc8ff,#ffb3d9)}.pf-sat{background:linear-gradient(90deg,#a0f0ff,#a0ffda)}
+.pf-sun{background:linear-gradient(90deg,#ffb3b3,#ffcca0)}
 .prog-pct { font-size:11px; font-weight:700; color:rgba(255,255,255,0.65); min-width:30px; text-align:right; }
 
-/* TOTAL */
 .total-bar { background:#2a2a3e; border-radius:20px; padding:14px 20px; margin-top:16px; border:2px solid #ff7eb3; display:flex; align-items:center; justify-content:space-between; gap:12px; }
 .total-lbl { font-size:14px; font-weight:700; color:#ccc; }
 .total-num { font-size:22px; font-weight:800; background:linear-gradient(90deg,#ff7eb3,#ffd166); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
 .reset-btn { font-family:'Nunito',sans-serif; font-size:12px; font-weight:700; padding:6px 14px; border-radius:20px; border:2px solid #ff7eb3; background:transparent; color:#ff7eb3; cursor:pointer; }
 .reset-btn:hover { background:#ff7eb3; color:white; }
 
-/* LOADING */
-#loading { position:fixed; inset:0; background:#1a1a2e; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:999; gap:14px; transition:opacity 0.4s; }
+#loading { position:fixed; inset:0; background:#1a1a2e; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:999; gap:14px; transition:opacity 0.5s; }
 #loading p { color:#aaa; font-size:15px; font-weight:700; }
 .spinner { width:36px; height:36px; border:3px solid rgba(255,126,179,0.2); border-top-color:#ff7eb3; border-radius:50%; animation:spin 0.8s linear infinite; }
-@keyframes spin { to{transform:rotate(360deg)} }
+@keyframes spin{to{transform:rotate(360deg)}}
 
-@media(max-width:480px){ body{padding:10px 10px 40px;} .header h1{font-size:20px;} .days-grid,.store-grid{grid-template-columns:1fr;} }
+@media(max-width:480px){ body{padding:10px 10px 40px} .header h1{font-size:20px} .days-grid,.store-grid{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
@@ -169,42 +132,40 @@ body { font-family: 'Nunito', sans-serif; background: #1a1a2e; min-height: 100vh
   </div>
   <h1>✨ Weekly Grocery List ✨</h1>
   <p>Shared live — changes sync for everyone!</p>
-  <div style="display:flex;justify-content:center;margin-top:6px;">
+  <div style="display:flex;justify-content:center;margin-top:6px">
     <span class="sync-badge"><span class="sync-dot" id="syncDot"></span><span id="syncLabel">Connecting…</span></span>
   </div>
 </div>
 
-<!-- SHOPPING LISTS -->
 <div class="trip-section">
   <div class="trip-title">🛒 Sunday Trip &nbsp;·&nbsp; <span style="font-weight:400;text-transform:none;letter-spacing:0">For Mon · Tue · Wed</span></div>
-  <div class="store-grid" id="sun-grid">
-    <div class="store-card sc-costco"><div class="store-card-head"><span class="store-card-icon">🏪</span><span class="store-card-name">Costco</span><span class="store-card-count" id="cnt-sun-costco">—</span></div><div id="sl-sun-costco"><div class="shop-none">Nothing yet</div></div></div>
-    <div class="store-card sc-newleaf"><div class="store-card-head"><span class="store-card-icon">🌿</span><span class="store-card-name">New Leaf</span><span class="store-card-count" id="cnt-sun-newleaf">—</span></div><div id="sl-sun-newleaf"><div class="shop-none">Nothing yet</div></div></div>
-    <div class="store-card sc-either"><div class="store-card-head"><span class="store-card-icon">🛒</span><span class="store-card-name">New Leaf or Costco</span><span class="store-card-count" id="cnt-sun-either">—</span></div><div id="sl-sun-either"><div class="shop-none">Nothing yet</div></div></div>
-    <div class="store-card sc-foodbin"><div class="store-card-head"><span class="store-card-icon">🌾</span><span class="store-card-name">Food Bin</span><span class="store-card-count" id="cnt-sun-foodbin">—</span></div><div id="sl-sun-foodbin"><div class="shop-none">Nothing yet</div></div></div>
-    <div class="store-card sc-safeway"><div class="store-card-head"><span class="store-card-icon">🔴</span><span class="store-card-name">Safeway</span><span class="store-card-count" id="cnt-sun-safeway">—</span></div><div id="sl-sun-safeway"><div class="shop-none">Nothing yet</div></div></div>
-    <div class="store-card sc-unknown"><div class="store-card-head"><span class="store-card-icon">📋</span><span class="store-card-name">Store TBD</span><span class="store-card-count" id="cnt-sun-unknown">—</span></div><div id="sl-sun-unknown"><div class="shop-none">Nothing yet</div></div></div>
+  <div class="store-grid">
+    <div class="store-card sc-costco"><div class="sc-head"><span class="sc-icon">🏪</span><span class="sc-name">Costco</span><span class="sc-cnt" id="cnt-sun-costco">—</span></div><div id="sl-sun-costco"><div class="sh-none">Nothing yet</div></div></div>
+    <div class="store-card sc-newleaf"><div class="sc-head"><span class="sc-icon">🌿</span><span class="sc-name">New Leaf</span><span class="sc-cnt" id="cnt-sun-newleaf">—</span></div><div id="sl-sun-newleaf"><div class="sh-none">Nothing yet</div></div></div>
+    <div class="store-card sc-either"><div class="sc-head"><span class="sc-icon">🛒</span><span class="sc-name">New Leaf or Costco</span><span class="sc-cnt" id="cnt-sun-either">—</span></div><div id="sl-sun-either"><div class="sh-none">Nothing yet</div></div></div>
+    <div class="store-card sc-foodbin"><div class="sc-head"><span class="sc-icon">🌾</span><span class="sc-name">Food Bin</span><span class="sc-cnt" id="cnt-sun-foodbin">—</span></div><div id="sl-sun-foodbin"><div class="sh-none">Nothing yet</div></div></div>
+    <div class="store-card sc-safeway"><div class="sc-head"><span class="sc-icon">🔴</span><span class="sc-name">Safeway</span><span class="sc-cnt" id="cnt-sun-safeway">—</span></div><div id="sl-sun-safeway"><div class="sh-none">Nothing yet</div></div></div>
+    <div class="store-card sc-unknown"><div class="sc-head"><span class="sc-icon">📋</span><span class="sc-name">Store TBD</span><span class="sc-cnt" id="cnt-sun-unknown">—</span></div><div id="sl-sun-unknown"><div class="sh-none">Nothing yet</div></div></div>
   </div>
 </div>
 
 <div class="trip-section">
   <div class="trip-title">🛍️ Wednesday Trip &nbsp;·&nbsp; <span style="font-weight:400;text-transform:none;letter-spacing:0">For Thu · Fri</span></div>
-  <div class="store-grid" id="wed-grid">
-    <div class="store-card sc-costco"><div class="store-card-head"><span class="store-card-icon">🏪</span><span class="store-card-name">Costco</span><span class="store-card-count" id="cnt-wed-costco">—</span></div><div id="sl-wed-costco"><div class="shop-none">Nothing yet</div></div></div>
-    <div class="store-card sc-newleaf"><div class="store-card-head"><span class="store-card-icon">🌿</span><span class="store-card-name">New Leaf</span><span class="store-card-count" id="cnt-wed-newleaf">—</span></div><div id="sl-wed-newleaf"><div class="shop-none">Nothing yet</div></div></div>
-    <div class="store-card sc-either"><div class="store-card-head"><span class="store-card-icon">🛒</span><span class="store-card-name">New Leaf or Costco</span><span class="store-card-count" id="cnt-wed-either">—</span></div><div id="sl-wed-either"><div class="shop-none">Nothing yet</div></div></div>
-    <div class="store-card sc-foodbin"><div class="store-card-head"><span class="store-card-icon">🌾</span><span class="store-card-name">Food Bin</span><span class="store-card-count" id="cnt-wed-foodbin">—</span></div><div id="sl-wed-foodbin"><div class="shop-none">Nothing yet</div></div></div>
-    <div class="store-card sc-safeway"><div class="store-card-head"><span class="store-card-icon">🔴</span><span class="store-card-name">Safeway</span><span class="store-card-count" id="cnt-wed-safeway">—</span></div><div id="sl-wed-safeway"><div class="shop-none">Nothing yet</div></div></div>
-    <div class="store-card sc-unknown"><div class="store-card-head"><span class="store-card-icon">📋</span><span class="store-card-name">Store TBD</span><span class="store-card-count" id="cnt-wed-unknown">—</span></div><div id="sl-wed-unknown"><div class="shop-none">Nothing yet</div></div></div>
+  <div class="store-grid">
+    <div class="store-card sc-costco"><div class="sc-head"><span class="sc-icon">🏪</span><span class="sc-name">Costco</span><span class="sc-cnt" id="cnt-wed-costco">—</span></div><div id="sl-wed-costco"><div class="sh-none">Nothing yet</div></div></div>
+    <div class="store-card sc-newleaf"><div class="sc-head"><span class="sc-icon">🌿</span><span class="sc-name">New Leaf</span><span class="sc-cnt" id="cnt-wed-newleaf">—</span></div><div id="sl-wed-newleaf"><div class="sh-none">Nothing yet</div></div></div>
+    <div class="store-card sc-either"><div class="sc-head"><span class="sc-icon">🛒</span><span class="sc-name">New Leaf or Costco</span><span class="sc-cnt" id="cnt-wed-either">—</span></div><div id="sl-wed-either"><div class="sh-none">Nothing yet</div></div></div>
+    <div class="store-card sc-foodbin"><div class="sc-head"><span class="sc-icon">🌾</span><span class="sc-name">Food Bin</span><span class="sc-cnt" id="cnt-wed-foodbin">—</span></div><div id="sl-wed-foodbin"><div class="sh-none">Nothing yet</div></div></div>
+    <div class="store-card sc-safeway"><div class="sc-head"><span class="sc-icon">🔴</span><span class="sc-name">Safeway</span><span class="sc-cnt" id="cnt-wed-safeway">—</span></div><div id="sl-wed-safeway"><div class="sh-none">Nothing yet</div></div></div>
+    <div class="store-card sc-unknown"><div class="sc-head"><span class="sc-icon">📋</span><span class="sc-name">Store TBD</span><span class="sc-cnt" id="cnt-wed-unknown">—</span></div><div id="sl-wed-unknown"><div class="sh-none">Nothing yet</div></div></div>
   </div>
 </div>
 
-<!-- DAY CARDS -->
 <div class="days-grid" id="daysGrid"></div>
 
 <div class="total-bar">
   <div><div class="total-lbl">Total checked</div><div class="total-num" id="totalNum">0 / 0</div></div>
-  <div style="display:flex;flex-direction:column;align-items:center;gap:6px;">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
     <div style="font-size:22px">🛒</div>
     <button class="reset-btn" id="resetBtn">Reset all</button>
   </div>
@@ -214,7 +175,7 @@ body { font-family: 'Nunito', sans-serif; background: #1a1a2e; min-height: 100vh
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getDatabase, ref, onValue, set, remove, push, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-const FB = {
+const db = getDatabase(initializeApp({
   apiKey:"AIzaSyCqLvPickUwIY2M5CQRfrndkUKwrOVSY1M",
   authDomain:"art104-nature-interactive-lect.firebaseapp.com",
   databaseURL:"https://art104-nature-interactive-lect-default-rtdb.firebaseio.com",
@@ -222,23 +183,22 @@ const FB = {
   storageBucket:"art104-nature-interactive-lect.firebasestorage.app",
   messagingSenderId:"27298236678",
   appId:"1:27298236678:web:7113d481f512e8c66d3687"
-};
-const db  = getDatabase(initializeApp(FB));
-const ROOT = "grocerylist_v3";
+}));
+
+const ROOT = "gl_v4";
 const SEED_VER = 1;
 
-// ── CONFIG ──────────────────────────────────────────────────────
 const DAYS = ['mon','tue','wed','thu','fri','sat','sun'];
 const DAY_NAMES  = {mon:'Monday',tue:'Tuesday',wed:'Wednesday',thu:'Thursday',fri:'Friday',sat:'Saturday',sun:'Sunday'};
 const DAY_LABELS = {mon:'Mon',tue:'Tue',wed:'Wed',thu:'Thu',fri:'Fri',sat:'Sat',sun:'Sun'};
 
 const MEALS = [
-  {id:'breakfast', label:'Breakfast',       emoji:'🌅'},
-  {id:'snack1',    label:'Morning Snack',    emoji:'🍎'},
-  {id:'lunch',     label:'Lunch',            emoji:'☀️'},
-  {id:'snack2',    label:'Afternoon Snack',  emoji:'🍊'},
-  {id:'dinner',    label:'Dinner',           emoji:'🌙'},
-  {id:'other',     label:'Other & Misc.',    emoji:'🧺'},
+  {id:'breakfast',label:'Breakfast',      emoji:'🌅'},
+  {id:'snack1',   label:'Morning Snack',  emoji:'🍎'},
+  {id:'lunch',    label:'Lunch',          emoji:'☀️'},
+  {id:'snack2',   label:'Afternoon Snack',emoji:'🍊'},
+  {id:'dinner',   label:'Dinner',         emoji:'🌙'},
+  {id:'other',    label:'Other & Misc.',  emoji:'🧺'},
 ];
 
 const SUN_DAYS = ['mon','tue','wed'];
@@ -252,7 +212,6 @@ const STORES = [
   {id:'safeway',label:'Safeway',           cls:'sp-safeway'},
 ];
 const STORE_IDS = ['costco','newleaf','either','foodbin','safeway','unknown'];
-
 const AISLES = ['Produce','Bread & Pasta','Dry Goods & Bulk','Canned & Jarred','Frozen','Condiments & Oils','Spices','Other'];
 
 const DAY_SVGS = {
@@ -266,47 +225,33 @@ const DAY_SVGS = {
 };
 
 const PRESETS = {
-  mon:{ dinner:[
-    {text:'Kale',aisle:'Produce'},{text:'Celery',aisle:'Produce'},{text:'Carrots',aisle:'Produce'},
-    {text:'Peppers',aisle:'Produce'},{text:'Cucumbers',aisle:'Produce'},{text:'Apples',aisle:'Produce'},
-    {text:'Blood oranges',aisle:'Produce'},{text:'Berries',aisle:'Produce'},
-    {text:'Bread',aisle:'Bread & Pasta'},{text:'Pasta (rigatoni)',aisle:'Bread & Pasta'},
-    {text:'Pasta sauce',aisle:'Canned & Jarred'},{text:'Polpa crushed tomatoes',aisle:'Canned & Jarred'},
-    {text:'Tomato paste',aisle:'Canned & Jarred'},
+  mon:{dinner:[
+    {t:'Kale',a:'Produce'},{t:'Celery',a:'Produce'},{t:'Carrots',a:'Produce'},
+    {t:'Peppers',a:'Produce'},{t:'Cucumbers',a:'Produce'},{t:'Apples',a:'Produce'},
+    {t:'Blood oranges',a:'Produce'},{t:'Berries',a:'Produce'},
+    {t:'Bread',a:'Bread & Pasta'},{t:'Pasta (rigatoni)',a:'Bread & Pasta'},
+    {t:'Pasta sauce',a:'Canned & Jarred'},{t:'Polpa crushed tomatoes',a:'Canned & Jarred'},{t:'Tomato paste',a:'Canned & Jarred'},
   ]},
-  tue:{ dinner:[
-    {text:'Rainbow carrots',qty:'32 oz',aisle:'Produce'},{text:'Pomegranate arils',qty:'½ cup',aisle:'Produce'},
-    {text:'Fresh parsley',aisle:'Produce'},{text:'Fresh garlic',aisle:'Produce'},{text:'Shallot',aisle:'Produce'},
-    {text:'Black lentils',qty:'4 cups cooked',aisle:'Dry Goods & Bulk'},{text:'Pistachios shelled',qty:'6 tbsp',aisle:'Dry Goods & Bulk'},
-    {text:'Date syrup',aisle:'Condiments & Oils'},{text:'Red wine vinegar',qty:'½ cup',aisle:'Condiments & Oils'},
-    {text:'Chimichurri sauce',aisle:'Condiments & Oils'},
-    {text:'Red chili flakes',aisle:'Spices'},{text:'Garlic powder',aisle:'Spices'},
-    {text:'Dried oregano',aisle:'Spices'},{text:'Dried garlic',aisle:'Spices'},
+  tue:{dinner:[
+    {t:'Rainbow carrots',q:'32 oz',a:'Produce'},{t:'Pomegranate arils',q:'½ cup',a:'Produce'},
+    {t:'Fresh parsley',a:'Produce'},{t:'Fresh garlic',a:'Produce'},{t:'Shallot',a:'Produce'},
+    {t:'Black lentils',q:'4 cups',a:'Dry Goods & Bulk'},{t:'Pistachios shelled',q:'6 tbsp',a:'Dry Goods & Bulk'},
+    {t:'Date syrup',a:'Condiments & Oils'},{t:'Red wine vinegar',q:'½ cup',a:'Condiments & Oils'},{t:'Chimichurri sauce',a:'Condiments & Oils'},
+    {t:'Red chili flakes',a:'Spices'},{t:'Garlic powder',a:'Spices'},{t:'Dried oregano',a:'Spices'},{t:'Dried garlic',a:'Spices'},
   ]},
   wed:{
-    breakfast:[
-      {text:'Bagels',aisle:'Bread & Pasta'},{text:'Peanut butter',aisle:'Condiments & Oils'},
-      {text:'Fruit',aisle:'Produce'},{text:'Veggies',aisle:'Produce'},
-    ],
-    lunch:[
-      {text:'Tortillas',qty:'Costco',aisle:'Bread & Pasta'},{text:'Refried beans',aisle:'Canned & Jarred'},
-      {text:'Salsa',aisle:'Canned & Jarred'},
-    ],
+    breakfast:[{t:'Bagels',a:'Bread & Pasta'},{t:'Peanut butter',a:'Condiments & Oils'},{t:'Fruit',a:'Produce'},{t:'Veggies',a:'Produce'}],
+    lunch:[{t:'Tortillas',q:'Costco',a:'Bread & Pasta'},{t:'Refried beans',a:'Canned & Jarred'},{t:'Salsa',a:'Canned & Jarred'}],
   },
-  thu:{ dinner:[
-    {text:'Romaine lettuce',aisle:'Produce'},{text:'Beefsteak tomatoes',qty:'4 large',aisle:'Produce'},
-    {text:'White onion',aisle:'Produce'},{text:'Fresh cilantro',aisle:'Produce'},
-    {text:'Limes',qty:'4',aisle:'Produce'},{text:'Orange bell peppers',qty:'2 large',aisle:'Produce'},
-    {text:'Avocados',qty:'4 salad + 4 dressing',aisle:'Produce'},{text:'Fresh garlic',aisle:'Produce'},
-    {text:'Black or brown lentils',qty:'6 cups',aisle:'Dry Goods & Bulk'},
-    {text:'Brown rice',qty:'4 cups',aisle:'Dry Goods & Bulk'},{text:'Cashews',qty:'½ cup',aisle:'Dry Goods & Bulk'},
-    {text:'Salsa',aisle:'Canned & Jarred'},{text:'Black olives',qty:'2 cups',aisle:'Canned & Jarred'},
-    {text:'Marinated jalapeño slices',aisle:'Canned & Jarred'},{text:'Jalapeño brine',aisle:'Canned & Jarred'},
-    {text:'Frozen corn',aisle:'Frozen'},
-    {text:'Lime juice',qty:'½ cup',aisle:'Condiments & Oils'},{text:'Olive oil',qty:'½ cup',aisle:'Condiments & Oils'},
-    {text:'Apple cider vinegar',qty:'4 tbsp',aisle:'Condiments & Oils'},
-    {text:'Chili powder',aisle:'Spices'},{text:'Ground cumin',aisle:'Spices'},
-    {text:'Smoked paprika',aisle:'Spices'},{text:'Garlic powder',aisle:'Spices'},
+  thu:{dinner:[
+    {t:'Romaine lettuce',a:'Produce'},{t:'Beefsteak tomatoes',q:'4 large',a:'Produce'},
+    {t:'White onion',a:'Produce'},{t:'Fresh cilantro',a:'Produce'},{t:'Limes',q:'4',a:'Produce'},
+    {t:'Orange bell peppers',q:'2 large',a:'Produce'},{t:'Avocados',q:'4 salad + 4 dressing',a:'Produce'},{t:'Fresh garlic',a:'Produce'},
+    {t:'Black or brown lentils',q:'6 cups',a:'Dry Goods & Bulk'},{t:'Brown rice',q:'4 cups',a:'Dry Goods & Bulk'},{t:'Cashews',q:'½ cup',a:'Dry Goods & Bulk'},
+    {t:'Salsa',a:'Canned & Jarred'},{t:'Black olives',q:'2 cups',a:'Canned & Jarred'},{t:'Marinated jalapeño slices',a:'Canned & Jarred'},{t:'Jalapeño brine',a:'Canned & Jarred'},
+    {t:'Frozen corn',a:'Frozen'},
+    {t:'Lime juice',q:'½ cup',a:'Condiments & Oils'},{t:'Olive oil',q:'½ cup',a:'Condiments & Oils'},{t:'Apple cider vinegar',q:'4 tbsp',a:'Condiments & Oils'},
+    {t:'Chili powder',a:'Spices'},{t:'Ground cumin',a:'Spices'},{t:'Smoked paprika',a:'Spices'},{t:'Garlic powder',a:'Spices'},
   ]},
 };
 const PRESET_NAMES = {
@@ -316,196 +261,160 @@ const PRESET_NAMES = {
   thu:{dinner:'Layered Mexican Salad + Avocado Dressing'},
 };
 
-// ── STATE ───────────────────────────────────────────────────────
-let gItems = {};  // day -> mealId -> fbKey -> {text,qty,aisle,store,checked}
-let gNames = {};  // day -> mealId -> string
-let firstLoad = true;
-
-// ── SYNC UI ─────────────────────────────────────────────────────
+// ── SYNC STATUS ─────────────────────────────────────────────────
 const dot = document.getElementById('syncDot');
 const lbl = document.getElementById('syncLabel');
-function live()   { dot.className='sync-dot live';   lbl.textContent='Live — syncing'; }
-function saving() { dot.className='sync-dot saving'; lbl.textContent='Saving…'; }
+const live   = () => { dot.className='sync-dot live';   lbl.textContent='Live — syncing'; };
+const saving = () => { dot.className='sync-dot saving'; lbl.textContent='Saving…'; };
 
-// ── BUILD DAY CARDS ─────────────────────────────────────────────
-function buildCards() {
-  const grid = document.getElementById('daysGrid');
-  DAYS.forEach(day => {
-    const card = document.createElement('div');
-    card.className = `day-card day-${day}`;
-    card.id = `card-${day}`;
+// ── PER-MEAL ITEM CACHE ─────────────────────────────────────────
+// Cache is keyed by "day/mealId" → { fbKey: itemObj }
+const cache = {};
+const key = (day, mealId) => `${day}/${mealId}`;
 
-    // header
-    const hdr = document.createElement('div');
-    hdr.className = 'day-header';
-    hdr.innerHTML = DAY_SVGS[day] + `<div class="day-title">${DAY_NAMES[day]}</div>`;
-    card.appendChild(hdr);
+// ── BUILD ALL DAY CARDS FIRST ───────────────────────────────────
+const grid = document.getElementById('daysGrid');
+DAYS.forEach(day => {
+  const card = document.createElement('div');
+  card.className = `day-card day-${day}`;
 
-    // meal blocks
-    MEALS.forEach(meal => {
-      card.appendChild(makeMealBlock(day, meal));
-    });
-
-    // progress
-    const pw = document.createElement('div');
-    pw.className = 'prog-wrap';
-    pw.innerHTML = `<div class="prog-bar"><div class="prog-fill pf-${day}" id="pf-${day}" style="width:0%"></div></div><div class="prog-pct" id="pp-${day}">0%</div>`;
-    card.appendChild(pw);
-
-    grid.appendChild(card);
-  });
-}
-
-function makeMealBlock(day, meal) {
-  const isOther = meal.id === 'other';
-
-  const block = document.createElement('div');
-  block.className = isOther ? 'other-block' : 'meal-block';
-
-  // header
   const hdr = document.createElement('div');
-  hdr.className = 'meal-hdr';
-  hdr.innerHTML = `<span class="meal-emoji">${meal.emoji}</span><span class="meal-lbl">${meal.label}</span>${isOther ? '' : `<span class="meal-recipe" id="rn-${day}-${meal.id}"></span>`}<span class="meal-arrow" id="arr-${day}-${meal.id}">▾</span>`;
+  hdr.className = 'day-hdr';
+  hdr.innerHTML = DAY_SVGS[day] + `<div class="day-title">${DAY_NAMES[day]}</div>`;
+  card.appendChild(hdr);
 
-  // body
-  const body = document.createElement('div');
-  body.className = 'meal-body';
-  body.id = `mb-${day}-${meal.id}`;
+  MEALS.forEach(meal => {
+    const isOther = meal.id === 'other';
+    const block = document.createElement('div');
+    block.className = 'meal-block';
 
-  hdr.addEventListener('click', () => {
-    const isOpen = body.classList.contains('open');
-    body.classList.toggle('open', !isOpen);
-    document.getElementById(`arr-${day}-${meal.id}`).classList.toggle('open', !isOpen);
-  });
+    // collapsible header
+    const mhdr = document.createElement('div');
+    mhdr.className = 'meal-hdr';
+    mhdr.innerHTML = `<span class="meal-emoji">${meal.emoji}</span><span class="meal-lbl">${meal.label}</span>${isOther ? '' : `<span class="meal-recipe-display" id="rd-${day}-${meal.id}"></span>`}<span class="meal-arrow" id="ma-${day}-${meal.id}">▾</span>`;
 
-  // recipe name (not for other)
-  if (!isOther) {
-    const ri = document.createElement('div');
-    ri.className = 'recipe-row';
-    const rinp = document.createElement('input');
-    rinp.className = 'recipe-inp';
-    rinp.type = 'text';
-    rinp.placeholder = `${meal.label} recipe…`;
-    rinp.id = `ri-${day}-${meal.id}`;
-    let t;
-    rinp.addEventListener('input', () => {
-      const rn = document.getElementById(`rn-${day}-${meal.id}`);
-      if (rn) rn.textContent = rinp.value;
-      clearTimeout(t);
-      t = setTimeout(() => {
-        saving();
-        set(ref(db,`${ROOT}/names/${day}/${meal.id}`), rinp.value || null).then(live);
-      }, 600);
+    const mbody = document.createElement('div');
+    mbody.className = 'meal-body';
+    mbody.id = `mb-${day}-${meal.id}`;
+
+    mhdr.addEventListener('click', () => {
+      mbody.classList.toggle('open');
+      document.getElementById(`ma-${day}-${meal.id}`).classList.toggle('open');
     });
-    ri.appendChild(rinp);
-    body.appendChild(ri);
-  }
 
-  // items list
-  const ul = document.createElement('ul');
-  ul.className = 'items-ul';
-  ul.id = `ul-${day}-${meal.id}`;
-  body.appendChild(ul);
+    // recipe name input (not for other)
+    if (!isOther) {
+      const ri = document.createElement('input');
+      ri.className = 'recipe-inp';
+      ri.type = 'text';
+      ri.placeholder = `${meal.label} recipe name…`;
+      ri.id = `ri-${day}-${meal.id}`;
+      let t;
+      ri.addEventListener('input', () => {
+        const rd = document.getElementById(`rd-${day}-${meal.id}`);
+        if (rd) rd.textContent = ri.value;
+        clearTimeout(t);
+        t = setTimeout(() => {
+          saving();
+          set(ref(db,`${ROOT}/names/${day}/${meal.id}`), ri.value||null).then(live);
+        }, 600);
+      });
+      mbody.appendChild(ri);
+    }
 
-  // add row
-  const ar = document.createElement('div');
-  ar.className = 'add-row';
-  const ai = document.createElement('input');
-  ai.className = 'add-inp';
-  ai.type = 'text';
-  ai.placeholder = isOther ? 'Add misc. item…' : 'Add ingredient…';
-  const ab = document.createElement('button');
-  ab.className = 'add-btn';
-  ab.textContent = '+';
+    // items list — this is the crucial element
+    const ul = document.createElement('ul');
+    ul.className = 'items-ul';
+    ul.id = `ul-${day}-${meal.id}`;
+    mbody.appendChild(ul);
 
-  function doAdd() {
-    const text = ai.value.trim();
-    if (!text) return;
-    console.log(`[doAdd] day=${day} meal=${meal.id} text=${text}`);
-    const ulCheck = document.getElementById(`ul-${day}-${meal.id}`);
-    console.log(`[doAdd] ul-${day}-${meal.id} found:`, ulCheck ? 'YES' : 'NO');
-    body.classList.add('open');
-    document.getElementById(`arr-${day}-${meal.id}`).classList.add('open');
-    ai.value = '';
-    ai.focus();
-    saving();
-    push(ref(db,`${ROOT}/items/${day}/${meal.id}`), {text, qty:'', aisle:'Other', store:'', checked:false}).then(live);
-  }
+    // add row
+    const addInp = document.createElement('input');
+    addInp.className = 'add-inp';
+    addInp.type = 'text';
+    addInp.placeholder = isOther ? 'Add misc item…' : 'Add ingredient…';
+    const addBtn = document.createElement('button');
+    addBtn.className = 'add-btn';
+    addBtn.textContent = '+';
 
-  ab.addEventListener('click', doAdd);
-  ai.addEventListener('keydown', e => { if (e.key==='Enter') doAdd(); });
-  ar.appendChild(ai);
-  ar.appendChild(ab);
-  body.appendChild(ar);
+    const doAdd = () => {
+      const text = addInp.value.trim();
+      if (!text) return;
+      // ensure open
+      mbody.classList.add('open');
+      document.getElementById(`ma-${day}-${meal.id}`).classList.add('open');
+      addInp.value = '';
+      addInp.focus();
+      saving();
+      push(ref(db,`${ROOT}/items/${day}/${meal.id}`), {t:text,q:'',a:'Other',s:'',c:false}).then(live);
+    };
+    addBtn.addEventListener('click', doAdd);
+    addInp.addEventListener('keydown', e => { if(e.key==='Enter') doAdd(); });
 
-  block.appendChild(hdr);
-  block.appendChild(body);
-  return block;
-}
+    const addRow = document.createElement('div');
+    addRow.className = 'add-row';
+    addRow.appendChild(addInp);
+    addRow.appendChild(addBtn);
+    mbody.appendChild(addRow);
 
-// ── RENDER ITEMS ────────────────────────────────────────────────
-function renderItems(day, mealId) {
-  const ul = document.getElementById(`ul-${day}-${mealId}`);
-  if (!ul) return;
-  ul.innerHTML = '';
-  const bag = (gItems[day] || {})[mealId] || {};
-  const keys = Object.keys(bag);
-  if (day==='mon' && mealId==='breakfast') {
-    console.log(`[renderItems] mon/breakfast: ${keys.length} items`, bag);
-  }
-  Object.entries(bag).forEach(([key, item]) => {
-    if (!item || !item.text) return;
-    ul.appendChild(makeItemLi(day, mealId, key, item));
+    block.appendChild(mhdr);
+    block.appendChild(mbody);
+    card.appendChild(block);
   });
-}
 
-function makeItemLi(day, mealId, key, item) {
+  // progress bar
+  const pw = document.createElement('div');
+  pw.className = 'prog-wrap';
+  pw.innerHTML = `<div class="prog-bar"><div class="prog-fill pf-${day}" id="pf-${day}" style="width:0%"></div></div><div class="prog-pct" id="pp-${day}">0%</div>`;
+  card.appendChild(pw);
+
+  grid.appendChild(card);
+});
+
+// ── MAKE ITEM LI ────────────────────────────────────────────────
+function makeItemLi(day, mealId, fbKey, item) {
   const li = document.createElement('li');
   li.className = 'item-li';
+  li.dataset.k = fbKey;
 
-  // checkbox
   const cb = document.createElement('input');
   cb.type = 'checkbox';
   cb.className = 'item-cb';
-  cb.checked = !!item.checked;
+  cb.checked = !!item.c;
   cb.addEventListener('change', () => {
     saving();
-    set(ref(db,`${ROOT}/items/${day}/${mealId}/${key}/checked`), cb.checked).then(() => { live(); refresh(); });
-    refresh();
+    set(ref(db,`${ROOT}/items/${day}/${mealId}/${fbKey}/c`), cb.checked).then(() => { live(); refreshProg(); refreshShop(); });
+    lbl.classList.toggle('done', cb.checked);
+    refreshProg();
   });
 
-  // body div
   const bd = document.createElement('div');
   bd.className = 'item-body';
 
-  // label
-  const lbl = document.createElement('label');
-  lbl.className = 'item-lbl' + (item.checked ? ' done' : '');
-  lbl.textContent = item.text;
+  const lbl = document.createElement('span');
+  lbl.className = 'item-lbl' + (item.c ? ' done' : '');
+  lbl.textContent = item.t || '';
   lbl.addEventListener('click', () => cb.click());
   bd.appendChild(lbl);
 
-  // qty
-  if (item.qty) {
+  if (item.q) {
     const q = document.createElement('span');
     q.className = 'item-qty';
-    q.textContent = item.qty;
+    q.textContent = item.q;
     bd.appendChild(q);
   }
 
-  // store pills
   const sp = document.createElement('div');
   sp.className = 'item-stores';
-  STORES.forEach(s => {
+  STORES.forEach(store => {
     const pill = document.createElement('button');
-    pill.className = `store-pill ${s.cls}` + (item.store === s.id ? ' on' : '');
-    pill.textContent = s.label;
+    pill.className = `store-pill ${store.cls}` + (item.s === store.id ? ' on' : '');
+    pill.textContent = store.label;
     pill.addEventListener('click', () => {
-      const cur = item.store === s.id ? '' : s.id;
-      item.store = cur;
+      const cur = item.s === store.id ? '' : store.id;
+      item.s = cur;
       saving();
-      set(ref(db,`${ROOT}/items/${day}/${mealId}/${key}/store`), cur || null).then(() => { live(); refreshShop(); });
-      // update pills immediately
+      set(ref(db,`${ROOT}/items/${day}/${mealId}/${fbKey}/s`), cur||null).then(() => { live(); refreshShop(); });
       sp.querySelectorAll('.store-pill').forEach(p => p.classList.remove('on'));
       if (cur) pill.classList.add('on');
     });
@@ -513,13 +422,12 @@ function makeItemLi(day, mealId, key, item) {
   });
   bd.appendChild(sp);
 
-  // delete
   const del = document.createElement('button');
   del.className = 'item-del';
   del.textContent = '×';
   del.addEventListener('click', () => {
     saving();
-    remove(ref(db,`${ROOT}/items/${day}/${mealId}/${key}`)).then(live);
+    remove(ref(db,`${ROOT}/items/${day}/${mealId}/${fbKey}`)).then(live);
   });
 
   li.appendChild(cb);
@@ -528,16 +436,91 @@ function makeItemLi(day, mealId, key, item) {
   return li;
 }
 
-// ── PROGRESS & SHOPPING ─────────────────────────────────────────
-function refresh() {
-  // progress
+// ── PER-MEAL FIREBASE LISTENERS ─────────────────────────────────
+// One listener per meal per day — fires ONLY when that meal changes
+let listenersStarted = false;
+
+function startListeners() {
+  if (listenersStarted) return;
+  listenersStarted = true;
+
+  // names
+  onValue(ref(db,`${ROOT}/names`), snap => {
+    const names = snap.val() || {};
+    DAYS.forEach(day => MEALS.forEach(m => {
+      if (m.id === 'other') return;
+      const name = (names[day]||{})[m.id] || '';
+      const rd = document.getElementById(`rd-${day}-${m.id}`);
+      if (rd) rd.textContent = name;
+      const ri = document.getElementById(`ri-${day}-${m.id}`);
+      if (ri && document.activeElement !== ri) ri.value = name;
+    }));
+  });
+
+  // items — one listener per day/meal
+  DAYS.forEach(day => {
+    MEALS.forEach(meal => {
+      onValue(ref(db,`${ROOT}/items/${day}/${meal.id}`), snap => {
+        const data = snap.val() || {};
+        cache[key(day,meal.id)] = data;
+
+        const ul = document.getElementById(`ul-${day}-${meal.id}`);
+        if (!ul) return;
+
+        // smart diff: remove deleted, add new
+        // remove items no longer in firebase
+        Array.from(ul.children).forEach(li => {
+          if (!data[li.dataset.k]) li.remove();
+        });
+        // add items not yet in DOM
+        Object.entries(data).forEach(([fbKey, item]) => {
+          if (!item || !item.t) return;
+          if (!ul.querySelector(`[data-k="${fbKey}"]`)) {
+            ul.appendChild(makeItemLi(day, meal.id, fbKey, item));
+          } else {
+            // update checkbox state
+            const existing = ul.querySelector(`[data-k="${fbKey}"]`);
+            const cb = existing.querySelector('.item-cb');
+            if (cb) cb.checked = !!item.c;
+            const lbl = existing.querySelector('.item-lbl');
+            if (lbl) lbl.classList.toggle('done', !!item.c);
+          }
+        });
+
+        refreshProg();
+        refreshShop();
+      });
+    });
+  });
+}
+
+// ── SEED ────────────────────────────────────────────────────────
+async function seed(day) {
+  const snap = await new Promise(r => onValue(ref(db,`${ROOT}/sv/${day}`),r,{onlyOnce:true}));
+  if (snap.exists() && snap.val() >= SEED_VER) return;
+  const u = {};
+  Object.entries(PRESETS[day]||{}).forEach(([mId, items]) => {
+    items.forEach(item => {
+      const k = push(ref(db,`${ROOT}/items/${day}/${mId}`)).key;
+      u[`${ROOT}/items/${day}/${mId}/${k}`] = {t:item.t, q:item.q||'', a:item.a||'Other', s:'', c:false};
+    });
+  });
+  Object.entries(PRESET_NAMES[day]||{}).forEach(([mId,name]) => {
+    u[`${ROOT}/names/${day}/${mId}`] = name;
+  });
+  u[`${ROOT}/sv/${day}`] = SEED_VER;
+  await update(ref(db), u);
+}
+
+// ── PROGRESS ────────────────────────────────────────────────────
+function refreshProg() {
   let gc=0, gt=0;
   DAYS.forEach(day => {
     let c=0, t=0;
     MEALS.forEach(m => {
-      Object.values((gItems[day]||{})[m.id]||{}).forEach(item => {
-        if (!item||!item.text) return;
-        t++; if (item.checked) c++;
+      Object.values(cache[key(day,m.id)]||{}).forEach(item => {
+        if (!item||!item.t) return;
+        t++; if (item.c) c++;
       });
     });
     const pct = t ? Math.round(c/t*100) : 0;
@@ -549,108 +532,65 @@ function refresh() {
   });
   const tn = document.getElementById('totalNum');
   if (tn) tn.textContent = `${gc} / ${gt}`;
-  refreshShop();
 }
 
+// ── SHOPPING ────────────────────────────────────────────────────
 function refreshShop() {
   renderTrip('sun', SUN_DAYS);
   renderTrip('wed', WED_DAYS);
 }
 
 function renderTrip(trip, days) {
-  // build store->aisle->items map
   const map = {};
   STORE_IDS.forEach(s => map[s]={});
   days.forEach(day => {
     MEALS.forEach(m => {
-      Object.values((gItems[day]||{})[m.id]||{}).forEach(item => {
-        if (!item||!item.text||item.checked) return;
-        const s = item.store||'unknown';
-        const a = item.aisle||'Other';
+      Object.values(cache[key(day,m.id)]||{}).forEach(item => {
+        if (!item||!item.t||item.c) return;
+        const s = item.s||'unknown';
+        const a = item.a||'Other';
         if (!map[s][a]) map[s][a]=[];
-        map[s][a].push({text:item.text, qty:item.qty||'', day:DAY_LABELS[day], meal:m.label});
+        map[s][a].push({text:item.t, qty:item.q||'', day:DAY_LABELS[day], meal:m.label});
       });
     });
   });
   STORE_IDS.forEach(sid => {
-    const el = document.getElementById(`sl-${trip}-${sid}`);
+    const el  = document.getElementById(`sl-${trip}-${sid}`);
     const cnt = document.getElementById(`cnt-${trip}-${sid}`);
     if (!el) return;
-    const aisles = map[sid];
-    let total = Object.values(aisles).reduce((n,a)=>n+a.length,0);
+    let total = Object.values(map[sid]).reduce((n,a)=>n+a.length,0);
     if (cnt) cnt.textContent = total||'—';
-    if (!total) { el.innerHTML=`<div class="shop-none">${sid==='unknown'?'All assigned ✓':'Nothing yet'}</div>`; return; }
+    if (!total) { el.innerHTML=`<div class="sh-none">${sid==='unknown'?'All assigned ✓':'Nothing yet'}</div>`; return; }
     let h='';
     AISLES.forEach(a => {
-      const items=aisles[a]; if(!items||!items.length) return;
+      const items=map[sid][a]; if(!items||!items.length) return;
       h+=`<div class="aisle-lbl">${a}</div>`;
-      items.forEach(i => {
-        h+=`<div class="shop-item"><span>${i.text}</span>${i.qty?`<span class="s-qty">${i.qty}</span>`:''}<span class="s-meal">${i.meal}</span><span class="s-day">${i.day}</span></div>`;
-      });
+      items.forEach(i => { h+=`<div class="sh-item"><span>${i.text}</span>${i.qty?`<span class="s-qty">${i.qty}</span>`:''}<span class="s-meal">${i.meal}</span><span class="s-day">${i.day}</span></div>`; });
     });
     el.innerHTML=h;
   });
 }
 
-// ── SEED ────────────────────────────────────────────────────────
-async function seed(day) {
-  const snap = await new Promise(r=>onValue(ref(db,`${ROOT}/seedVer/${day}`),r,{onlyOnce:true}));
-  if (snap.exists() && snap.val()>=SEED_VER) return;
-  await set(ref(db,`${ROOT}/items/${day}`), null);
-  const u={};
-  Object.entries(PRESETS[day]||{}).forEach(([mId,items])=>{
-    items.forEach(item=>{
-      const k=push(ref(db,`${ROOT}/items/${day}/${mId}`)).key;
-      u[`${ROOT}/items/${day}/${mId}/${k}`]={text:item.text,qty:item.qty||'',aisle:item.aisle||'Other',store:'',checked:false};
-    });
-  });
-  Object.entries(PRESET_NAMES[day]||{}).forEach(([mId,name])=>{
-    u[`${ROOT}/names/${day}/${mId}`]=name;
-  });
-  u[`${ROOT}/seedVer/${day}`]=SEED_VER;
-  await update(ref(db),u);
-}
-
-// ── INIT ────────────────────────────────────────────────────────
-buildCards();
-['mon','tue','wed','thu'].forEach(seed);
-
-// names listener
-onValue(ref(db,`${ROOT}/names`), snap=>{
-  gNames = snap.val()||{};
-  DAYS.forEach(day=>MEALS.forEach(m=>{
-    const name=(gNames[day]||{})[m.id]||'';
-    const rn=document.getElementById(`rn-${day}-${m.id}`);
-    if (rn) rn.textContent=name;
-    const ri=document.getElementById(`ri-${day}-${m.id}`);
-    if (ri&&document.activeElement!==ri) ri.value=name;
-  }));
-});
-
-// items listener
-onValue(ref(db,`${ROOT}/items`), snap=>{
-  gItems=snap.val()||{};
-  DAYS.forEach(day=>MEALS.forEach(m=>renderItems(day,m.id)));
-  refresh();
-  if (firstLoad) {
-    firstLoad=false;
-    const ld=document.getElementById('loading');
-    if(ld){ld.style.opacity='0';setTimeout(()=>ld.remove(),400);}
-    live();
-  }
-});
-
-// reset
-document.getElementById('resetBtn').addEventListener('click',()=>{
-  if(!confirm('Uncheck all items for everyone?')) return;
+// ── RESET ────────────────────────────────────────────────────────
+document.getElementById('resetBtn').addEventListener('click', () => {
+  if (!confirm('Uncheck all items for everyone?')) return;
   saving();
-  const u={};
-  DAYS.forEach(day=>MEALS.forEach(m=>{
-    Object.keys((gItems[day]||{})[m.id]||{}).forEach(k=>{
-      u[`${ROOT}/items/${day}/${m.id}/${k}/checked`]=false;
+  const u = {};
+  DAYS.forEach(day => MEALS.forEach(m => {
+    Object.keys(cache[key(day,m.id)]||{}).forEach(k => {
+      u[`${ROOT}/items/${day}/${m.id}/${k}/c`] = false;
     });
   }));
   update(ref(db),u).then(live);
+});
+
+// ── START ────────────────────────────────────────────────────────
+// Seed first, then start listeners (avoids double-render during seeding)
+Promise.all(['mon','tue','wed','thu'].map(seed)).then(() => {
+  startListeners();
+  const ld = document.getElementById('loading');
+  if (ld) { ld.style.opacity='0'; setTimeout(()=>ld.remove(),500); }
+  live();
 });
 </script>
 </body>
