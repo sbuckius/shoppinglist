@@ -263,9 +263,9 @@ const PRESET_NAMES = {
 
 // ── SYNC STATUS ─────────────────────────────────────────────────
 const dot = document.getElementById('syncDot');
-const lbl = document.getElementById('syncLabel');
-const live   = () => { dot.className='sync-dot live';   lbl.textContent='Live — syncing'; };
-const saving = () => { dot.className='sync-dot saving'; lbl.textContent='Saving…'; };
+const syncLbl = document.getElementById('syncLabel');
+const live   = () => { dot.className='sync-dot live';   syncLbl.textContent='Live — syncing'; };
+const saving = () => { dot.className='sync-dot saving'; syncLbl.textContent='Saving…'; };
 
 // ── PER-MEAL ITEM CACHE ─────────────────────────────────────────
 // Cache is keyed by "day/mealId" → { fbKey: itemObj }
